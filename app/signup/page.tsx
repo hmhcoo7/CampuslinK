@@ -55,6 +55,13 @@ export default function SignupPage() {
       alert('이메일을 입력해주세요')
       return
     }
+
+    // 광운대 이메일 도메인 확인
+    if (!formData.email.endsWith('@kw.ac.kr')) {
+      alert('광운대학교 이메일(@kw.ac.kr)만 가입 가능합니다')
+      return
+    }
+
     if (!formData.password) {
       alert('비밀번호를 입력해주세요')
       return
@@ -67,6 +74,12 @@ export default function SignupPage() {
     // 비밀번호 일치 검사
     if (formData.password !== formData.passwordConfirm) {
       alert('비밀번호를 다시 확인해주세요')
+      return
+    }
+
+    // 비밀번호 길이 검사
+    if (formData.password.length < 6) {
+      alert('비밀번호는 최소 6자 이상이어야 합니다')
       return
     }
 
@@ -83,36 +96,48 @@ export default function SignupPage() {
     // 회원가입 처리
     setIsLoading(true)
     try {
-      // 이메일 중복 확인
-      const { data: existingUser } = await supabase
-        .from('회원')
-        .select('email')
-        .eq('email', formData.email)
-        .single()
-
-      if (existingUser) {
-        alert('이미 사용 중인 이메일입니다')
-        setIsLoading(false)
-        return
-      }
-
-      // 회원 정보 저장
-      const { error } = await supabase
-        .from('회원')
-        .insert({
-          email: formData.email,
-          password: formData.password,
-          nick_name: formData.nickname,
-        })
+      // Supabase Auth를 사용한 회원가입
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          data: {
+            nickname: formData.nickname,
+          },
+        },
+      })
 
       if (error) {
         console.error('회원가입 오류:', error)
-        alert('회원가입 중 오류가 발생했습니다: ' + error.message)
+        if (error.message.includes('already registered')) {
+          alert('이미 가입된 이메일입니다')
+        } else {
+          alert('회원가입 중 오류가 발생했습니다: ' + error.message)
+        }
         setIsLoading(false)
         return
       }
 
-      alert('회원가입이 완료되었습니다!')
+      // Auth 회원가입 성공 후 '회원' 테이블에도 저장
+      if (data.user) {
+        const { error: dbError } = await supabase
+          .from('회원')
+          .insert({
+            id: data.user.id, // Auth user ID 저장
+            email: formData.email,
+            nick_name: formData.nickname,
+          })
+
+        if (dbError) {
+          console.error('회원 테이블 저장 오류:', dbError)
+          // Auth에는 생성되었지만 회원 테이블 저장 실패
+          // 계속 진행 (이메일 인증 후 재시도 가능)
+        }
+      }
+
+      // 회원가입 성공 - 이메일 인증 안내
+      alert('회원가입 요청이 완료되었습니다!\n입력하신 광운대 이메일로 인증 링크가 발송되었습니다.\n이메일을 확인하여 인증을 완료해주세요.')
       router.push('/login')
     } catch (error) {
       console.error('회원가입 오류:', error)

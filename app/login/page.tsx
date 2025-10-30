@@ -32,27 +32,38 @@ export default function LoginPage() {
     // 로그인 처리
     setIsLoading(true)
     try {
-      const { data, error } = await supabase
-        .from('회원')
-        .select('*')
-        .eq('email', formData.email)
-        .eq('password', formData.password)
-        .single()
+      // Supabase Auth를 사용한 로그인
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      })
 
-      if (error || !data) {
-        alert('이메일 또는 비밀번호가 일치하지 않습니다')
+      if (error) {
+        console.error('로그인 오류:', error)
+
+        // 이메일 인증 확인
+        if (error.message.includes('Email not confirmed')) {
+          alert('이메일 인증이 완료되지 않았습니다.\n광운대 이메일로 발송된 인증 링크를 확인해주세요.')
+        } else if (error.message.includes('Invalid login credentials')) {
+          alert('이메일 또는 비밀번호가 일치하지 않습니다')
+        } else {
+          alert('로그인 중 오류가 발생했습니다: ' + error.message)
+        }
         setIsLoading(false)
         return
       }
 
-      // 로그인 성공
-      alert(`환영합니다, ${data.nick_name}님!`)
-      // 세션 정보 저장 (localStorage 사용)
-      localStorage.setItem('user', JSON.stringify({
-        email: data.email,
-        nick_name: data.nick_name,
-      }))
+      // 로그인 성공 - '회원' 테이블에서 닉네임 가져오기
+      const { data: userProfile } = await supabase
+        .from('회원')
+        .select('nick_name')
+        .eq('id', data.user.id)
+        .single()
+
+      const nickname = userProfile?.nick_name || data.user?.user_metadata?.nickname || '사용자'
+      alert(`환영합니다, ${nickname}님!`)
       router.push('/')
+      router.refresh()
     } catch (error) {
       console.error('로그인 오류:', error)
       alert('로그인 중 오류가 발생했습니다')
