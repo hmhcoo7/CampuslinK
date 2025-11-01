@@ -104,11 +104,11 @@ export default function Home() {
       {/* 전공 카테고리 드롭다운 */}
       {isMajorDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
+          <div className="max-w-[1440px] mx-auto px-12 py-6">
             <div className="flex gap-0">
               {/* 왼쪽 - 단과대 목록 */}
-              <div className="w-[382px] flex-shrink-0">
-                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] mb-4">
+              <div className="w-[382px] h-[444px] flex-shrink-0">
+                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-2">
                   단과대 &gt;
                 </h3>
                 <div className="space-y-0">
@@ -116,7 +116,7 @@ export default function Home() {
                     <button
                       key={college}
                       onClick={() => setSelectedCollege(college)}
-                      className={`w-full text-left px-4 py-1 font-semibold text-[16px] leading-[30px] transition-colors ${
+                      className={`w-full text-left font-semibold text-[16px] leading-[30px] transition-colors ${
                         selectedCollege === college
                           ? 'text-black'
                           : 'text-[#595959]'
@@ -130,11 +130,11 @@ export default function Home() {
               </div>
 
               {/* 세로 구분선 */}
-              <div className="w-[1px] bg-black mx-8"></div>
+              <div className="w-[1px] h-[544px] bg-[#7F2323] mx-6"></div>
 
               {/* 오른쪽 - 학과 목록 */}
               <div className="flex-1">
-                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] mb-4">
+                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-2">
                   학과 &gt;
                 </h3>
                 {selectedCollege ? (
@@ -146,16 +146,14 @@ export default function Home() {
                           // 나중에 모임 목록 페이지로 이동
                           console.log(`선택된 학과: ${department}`)
                         }}
-                        className="block w-full text-left px-4 py-1 text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                        className="block w-full text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
                         style={{ fontFamily: 'Inter' }}
                       >
                         {department}
                       </button>
                     ))}
                   </div>
-                ) : (
-                  <p className="text-[#595959] text-[16px] px-4">단과대를 선택해주세요</p>
-                )}
+                ) : null}
               </div>
             </div>
           </div>
