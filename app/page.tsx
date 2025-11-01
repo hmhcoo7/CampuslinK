@@ -95,7 +95,7 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image
-              src="/icons/로고.png"
+              src="/icons/logo.png"
               alt="CampusLinK Logo"
               width={24}
               height={24}
@@ -198,55 +198,57 @@ export default function Home() {
       {isMajorDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="flex gap-0 items-start">
-              {/* 왼쪽 - 단과대 목록 */}
-              <div className="w-[382px] h-[444px] flex-shrink-0 pl-12">
-                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
-                  단과대 &gt;
-                </h3>
-                <div className="space-y-0 ml-4">
-                  {Object.keys(collegeData).map((college) => (
-                    <button
-                      key={college}
-                      onClick={() => setSelectedCollege(college)}
-                      className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors ${
-                        selectedCollege === college
-                          ? 'text-black'
-                          : 'text-[#595959]'
-                      }`}
-                      style={{ fontFamily: 'Inter' }}
-                    >
-                      {college}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 세로 구분선 */}
-              <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0"></div>
-
-              {/* 오른쪽 - 학과 목록 */}
-              <div className="flex-1 pl-12">
-                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
-                  학과 &gt;
-                </h3>
-                {selectedCollege ? (
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="flex gap-0 items-start">
+                {/* 왼쪽 - 단과대 목록 */}
+                <div className="w-[191px] flex-shrink-0 pl-12">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                    단과대 &gt;
+                  </h3>
                   <div className="space-y-0 ml-4">
-                    {collegeData[selectedCollege].map((department) => (
+                    {Object.keys(collegeData).map((college) => (
                       <button
-                        key={department}
-                        onClick={() => {
-                          // 나중에 모임 목록 페이지로 이동
-                          console.log(`선택된 학과: ${department}`)
-                        }}
-                        className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                        key={college}
+                        onClick={() => setSelectedCollege(college)}
+                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors ${
+                          selectedCollege === college
+                            ? 'text-black'
+                            : 'text-[#595959]'
+                        }`}
                         style={{ fontFamily: 'Inter' }}
                       >
-                        {department}
+                        {college}
                       </button>
                     ))}
                   </div>
-                ) : null}
+                </div>
+
+                {/* 세로 구분선 */}
+                <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0"></div>
+
+                {/* 오른쪽 - 학과 목록 */}
+                <div className="w-[190px] flex-shrink-0 pl-12">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                    학과 &gt;
+                  </h3>
+                  {selectedCollege ? (
+                    <div className="space-y-0 ml-4">
+                      {collegeData[selectedCollege].map((department) => (
+                        <button
+                          key={department}
+                          onClick={() => {
+                            // 나중에 모임 목록 페이지로 이동
+                            console.log(`선택된 학과: ${department}`)
+                          }}
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                          style={{ fontFamily: 'Inter' }}
+                        >
+                          {department}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
@@ -257,7 +259,7 @@ export default function Home() {
       {isContestDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {contestData.map((contest) => (
                   <button
@@ -266,7 +268,7 @@ export default function Home() {
                       setSelectedContest(contest)
                       console.log(`선택된 공모전: ${contest}`)
                     }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedContest === contest
                         ? 'text-black'
                         : 'text-[#595959]'
@@ -286,7 +288,7 @@ export default function Home() {
       {isCertificateDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {certificateData.map((certificate) => (
                   <button
@@ -295,7 +297,7 @@ export default function Home() {
                       setSelectedCertificate(certificate)
                       console.log(`선택된 자격증: ${certificate}`)
                     }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedCertificate === certificate
                         ? 'text-black'
                         : 'text-[#595959]'
@@ -315,7 +317,7 @@ export default function Home() {
       {isEtcDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {etcData.map((etc) => (
                   <button
@@ -324,7 +326,7 @@ export default function Home() {
                       setSelectedEtc(etc)
                       console.log(`선택된 기타: ${etc}`)
                     }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedEtc === etc
                         ? 'text-black'
                         : 'text-[#595959]'
