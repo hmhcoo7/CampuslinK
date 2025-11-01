@@ -81,7 +81,7 @@ export default function Home() {
                 전공
               </button>
               {isMajorDropdownOpen && (
-                <div className="absolute -bottom-[18px] left-0 w-[68px] h-[18px] bg-white"></div>
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
               )}
             </div>
             <Link href="/contest" className="hover:opacity-80">공모전</Link>
@@ -109,19 +109,19 @@ export default function Home() {
       {/* 전공 카테고리 드롭다운 */}
       {isMajorDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-6">
-            <div className="flex gap-0">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="flex gap-0 items-start">
               {/* 왼쪽 - 단과대 목록 */}
-              <div className="w-[382px] h-[444px] flex-shrink-0 pl-4">
-                <h3 className="text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-2 pr-8">
+              <div className="w-[382px] h-[444px] flex-shrink-0">
+                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-12">
                   단과대 &gt;
                 </h3>
-                <div className="space-y-0 pl-6">
+                <div className="space-y-0 ml-16">
                   {Object.keys(collegeData).map((college) => (
                     <button
                       key={college}
                       onClick={() => setSelectedCollege(college)}
-                      className={`w-full text-left font-semibold text-[16px] leading-[30px] transition-colors ${
+                      className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors ${
                         selectedCollege === college
                           ? 'text-black'
                           : 'text-[#595959]'
@@ -135,15 +135,15 @@ export default function Home() {
               </div>
 
               {/* 세로 구분선 */}
-              <div className="w-[1px] h-[544px] bg-[#7F2323]"></div>
+              <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0"></div>
 
               {/* 오른쪽 - 학과 목록 */}
-              <div className="flex-1 pl-4">
-                <h3 className="text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-2 pr-8">
+              <div className="flex-1">
+                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-12">
                   학과 &gt;
                 </h3>
                 {selectedCollege ? (
-                  <div className="space-y-0 pl-6">
+                  <div className="space-y-0 ml-16">
                     {collegeData[selectedCollege].map((department) => (
                       <button
                         key={department}
@@ -151,7 +151,7 @@ export default function Home() {
                           // 나중에 모임 목록 페이지로 이동
                           console.log(`선택된 학과: ${department}`)
                         }}
-                        className="block w-full text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                        className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
                         style={{ fontFamily: 'Inter' }}
                       >
                         {department}
