@@ -8,7 +8,13 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 8, 1)) // 2025년 9월
   const [isLiked, setIsLiked] = useState(false) // 하트 버튼 상태
   const [isMajorDropdownOpen, setIsMajorDropdownOpen] = useState(false) // 전공 드롭다운 상태
+  const [isContestDropdownOpen, setIsContestDropdownOpen] = useState(false) // 공모전 드롭다운 상태
+  const [isCertificateDropdownOpen, setIsCertificateDropdownOpen] = useState(false) // 자격증 드롭다운 상태
+  const [isEtcDropdownOpen, setIsEtcDropdownOpen] = useState(false) // 기타 드롭다운 상태
   const [selectedCollege, setSelectedCollege] = useState<string | null>(null) // 선택된 단과대
+  const [selectedContest, setSelectedContest] = useState<string | null>(null) // 선택된 공모전
+  const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null) // 선택된 자격증
+  const [selectedEtc, setSelectedEtc] = useState<string | null>(null) // 선택된 기타
 
   // 단과대-학과 데이터
   const collegeData: { [key: string]: string[] } = {
@@ -20,6 +26,37 @@ export default function Home() {
     '정책법학대학': ['행정학과', '법학부', '자산관리학과', '국제학부', '글로벌지속가능융합학과'],
     '경영대학': ['경영학부', '국제통상학부']
   }
+
+  // 공모전 카테고리 데이터
+  const contestData: string[] = [
+    '디자인/예술',
+    '기획/마케팅',
+    '경영/경제/회계',
+    'IT/개발/데이터',
+    '사회/환경/공공',
+    '과학/공학/기술',
+    '문학/글쓰기'
+  ]
+
+  // 자격증 카테고리 데이터
+  const certificateData: string[] = [
+    '경영/경제/회계',
+    'IT/컴퓨터',
+    '교육/심리/상담',
+    '과학/기술/공학',
+    '디자인/예술',
+    '서비스/관광/조리',
+    '산업/안전/기능',
+    '언어/국제'
+  ]
+
+  // 기타 카테고리 데이터
+  const etcData: string[] = [
+    '예술',
+    '운동',
+    '지식',
+    '힐링'
+  ]
 
   // 캘린더 날짜 생성
   const getDaysInMonth = (date: Date) => {
@@ -74,6 +111,9 @@ export default function Home() {
               <button
                 onClick={() => {
                   setIsMajorDropdownOpen(!isMajorDropdownOpen)
+                  setIsContestDropdownOpen(false)
+                  setIsCertificateDropdownOpen(false)
+                  setIsEtcDropdownOpen(false)
                   setSelectedCollege(null)
                 }}
                 className="hover:opacity-80"
@@ -84,9 +124,57 @@ export default function Home() {
                 <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
               )}
             </div>
-            <Link href="/contest" className="hover:opacity-80">공모전</Link>
-            <Link href="/certificate" className="hover:opacity-80">자격증</Link>
-            <Link href="/etc" className="hover:opacity-80">기타</Link>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setIsContestDropdownOpen(!isContestDropdownOpen)
+                  setIsMajorDropdownOpen(false)
+                  setIsCertificateDropdownOpen(false)
+                  setIsEtcDropdownOpen(false)
+                  setSelectedContest(null)
+                }}
+                className="hover:opacity-80"
+              >
+                공모전
+              </button>
+              {isContestDropdownOpen && (
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+              )}
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setIsCertificateDropdownOpen(!isCertificateDropdownOpen)
+                  setIsMajorDropdownOpen(false)
+                  setIsContestDropdownOpen(false)
+                  setIsEtcDropdownOpen(false)
+                  setSelectedCertificate(null)
+                }}
+                className="hover:opacity-80"
+              >
+                자격증
+              </button>
+              {isCertificateDropdownOpen && (
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+              )}
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => {
+                  setIsEtcDropdownOpen(!isEtcDropdownOpen)
+                  setIsMajorDropdownOpen(false)
+                  setIsContestDropdownOpen(false)
+                  setIsCertificateDropdownOpen(false)
+                  setSelectedEtc(null)
+                }}
+                className="hover:opacity-80"
+              >
+                기타
+              </button>
+              {isEtcDropdownOpen && (
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+              )}
+            </div>
             <Link href="/notices" className="hover:opacity-80">공지사항</Link>
             <Image
               src="/icons/notifications.svg"
@@ -112,11 +200,11 @@ export default function Home() {
           <div className="max-w-[1440px] mx-auto px-12 py-8">
             <div className="flex gap-0 items-start">
               {/* 왼쪽 - 단과대 목록 */}
-              <div className="w-[382px] h-[444px] flex-shrink-0">
-                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-12">
+              <div className="w-[382px] h-[444px] flex-shrink-0 pl-12">
+                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
                   단과대 &gt;
                 </h3>
-                <div className="space-y-0 ml-16">
+                <div className="space-y-0 ml-4">
                   {Object.keys(collegeData).map((college) => (
                     <button
                       key={college}
@@ -138,12 +226,12 @@ export default function Home() {
               <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0"></div>
 
               {/* 오른쪽 - 학과 목록 */}
-              <div className="flex-1">
-                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-12">
+              <div className="flex-1 pl-12">
+                <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
                   학과 &gt;
                 </h3>
                 {selectedCollege ? (
-                  <div className="space-y-0 ml-16">
+                  <div className="space-y-0 ml-4">
                     {collegeData[selectedCollege].map((department) => (
                       <button
                         key={department}
@@ -159,6 +247,93 @@ export default function Home() {
                     ))}
                   </div>
                 ) : null}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 공모전 카테고리 드롭다운 */}
+      {isContestDropdownOpen && (
+        <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="space-y-0 flex flex-col items-center">
+                {contestData.map((contest) => (
+                  <button
+                    key={contest}
+                    onClick={() => {
+                      setSelectedContest(contest)
+                      console.log(`선택된 공모전: ${contest}`)
+                    }}
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                      selectedContest === contest
+                        ? 'text-black'
+                        : 'text-[#595959]'
+                    }`}
+                    style={{ fontFamily: 'Inter' }}
+                  >
+                    {contest}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 자격증 카테고리 드롭다운 */}
+      {isCertificateDropdownOpen && (
+        <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="space-y-0 flex flex-col items-center">
+                {certificateData.map((certificate) => (
+                  <button
+                    key={certificate}
+                    onClick={() => {
+                      setSelectedCertificate(certificate)
+                      console.log(`선택된 자격증: ${certificate}`)
+                    }}
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                      selectedCertificate === certificate
+                        ? 'text-black'
+                        : 'text-[#595959]'
+                    }`}
+                    style={{ fontFamily: 'Inter' }}
+                  >
+                    {certificate}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 기타 카테고리 드롭다운 */}
+      {isEtcDropdownOpen && (
+        <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="space-y-0 flex flex-col items-center">
+                {etcData.map((etc) => (
+                  <button
+                    key={etc}
+                    onClick={() => {
+                      setSelectedEtc(etc)
+                      console.log(`선택된 기타: ${etc}`)
+                    }}
+                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors ${
+                      selectedEtc === etc
+                        ? 'text-black'
+                        : 'text-[#595959]'
+                    }`}
+                    style={{ fontFamily: 'Inter' }}
+                  >
+                    {etc}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
