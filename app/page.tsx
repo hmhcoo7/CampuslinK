@@ -95,7 +95,7 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src="/icons/logo.png"
+              src="/icons/logo.png?v=2"
               alt="CampusLinK Logo"
               className="w-6 h-6"
             />
