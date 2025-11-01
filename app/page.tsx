@@ -94,11 +94,9 @@ export default function Home() {
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image
-              src="/icons/logo.png"
+            <img
+              src="/icons/로고.png"
               alt="CampusLinK Logo"
-              width={24}
-              height={24}
               className="w-6 h-6"
             />
             <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
@@ -201,11 +199,11 @@ export default function Home() {
             <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
               <div className="flex gap-0 items-start">
                 {/* 왼쪽 - 단과대 목록 */}
-                <div className="w-[191px] flex-shrink-0 pl-12">
-                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                <div className="flex-1">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2">
                     단과대 &gt;
                   </h3>
-                  <div className="space-y-0 ml-4">
+                  <div className="space-y-0 ml-8">
                     {Object.keys(collegeData).map((college) => (
                       <button
                         key={college}
@@ -224,15 +222,15 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0"></div>
+                <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
 
                 {/* 오른쪽 - 학과 목록 */}
-                <div className="w-[190px] flex-shrink-0 pl-12">
-                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                <div className="flex-1">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2">
                     학과 &gt;
                   </h3>
                   {selectedCollege ? (
-                    <div className="space-y-0 ml-4">
+                    <div className="space-y-0 ml-8">
                       {collegeData[selectedCollege].map((department) => (
                         <button
                           key={department}
