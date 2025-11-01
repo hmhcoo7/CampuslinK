@@ -131,7 +131,7 @@ export default function Home() {
                         </span>
                         {/* 모임이 있는 날짜에 빨간 점 표시 */}
                         {eventDates.includes(day) && (
-                          <div className="absolute bottom-1 w-1.5 h-1.5 bg-[#7F2323] rounded-full"></div>
+                          <div className="absolute bottom-2 w-1.5 h-1.5 bg-[#7F2323] rounded-full"></div>
                         )}
                       </>
                     )}
@@ -153,27 +153,33 @@ export default function Home() {
           <div className="flex-1 flex flex-col gap-8">
             {/* 다가올 일정 */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-sm font-bold">SOON</span>
-                <h2 className="text-2xl font-bold text-black">다가올 일정</h2>
+              <div className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/icons/옆 화살표.png"
+                  alt="SOON"
+                  width={30}
+                  height={30}
+                  className="w-7 h-7"
+                />
+                <h2 className="text-[20px] font-[800] text-black">다가올 일정</h2>
               </div>
 
               {/* 예시 모임 카드 (나중에 데이터로 대체) */}
               <div className="space-y-4">
                 <div className="bg-[#E1E1E1] rounded-2xl p-6 relative">
-                  <h3 className="text-xl font-bold text-black mb-3">자료구조 스터디</h3>
-                  <div className="space-y-2 text-sm text-black">
+                  <h3 className="text-[20px] font-[800] text-black mb-3">자료구조 스터디</h3>
+                  <div className="space-y-1 text-black">
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📅</span>
-                      <span>날짜: 9월 21일 17:00 - 19:00</span>
+                      <Image src="/icons/알람시계.png" alt="시계" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 21일 17:00 - 19:00</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📍</span>
-                      <span>장소: 비마관</span>
+                      <Image src="/icons/깃발.png" alt="장소" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">장소: 비마관</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📋</span>
-                      <span>상태: 모집중</span>
+                      <Image src="/icons/책.png" alt="상태" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">상태: 모집중</span>
                     </div>
                   </div>
                   <button className="absolute top-6 right-6 bg-[#B7B7B7] text-white px-6 py-2 rounded-lg hover:bg-[#7F2323] transition-colors">
@@ -182,19 +188,19 @@ export default function Home() {
                 </div>
 
                 <div className="bg-[#E1E1E1] rounded-2xl p-6 relative">
-                  <h3 className="text-xl font-bold text-black mb-3">영어 회화</h3>
-                  <div className="space-y-2 text-sm text-black">
+                  <h3 className="text-[20px] font-[800] text-black mb-3">영어 회화</h3>
+                  <div className="space-y-1 text-black">
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📅</span>
-                      <span>날짜: 9월 24일 18:00 - 21:00</span>
+                      <Image src="/icons/알람시계.png" alt="시계" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 24일 18:00 - 21:00</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📍</span>
-                      <span>장소: 한울관</span>
+                      <Image src="/icons/깃발.png" alt="장소" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">장소: 한울관</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[#7F2323]">📋</span>
-                      <span>상태: 마감</span>
+                      <Image src="/icons/책.png" alt="상태" width={20} height={20} className="w-5 h-5" />
+                      <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                     </div>
                   </div>
                   <button className="absolute top-6 right-6 bg-[#B7B7B7] text-white px-6 py-2 rounded-lg hover:bg-[#7F2323] transition-colors">
@@ -206,26 +212,32 @@ export default function Home() {
 
             {/* 과거 신청 내역 */}
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">✓</span>
-                <h2 className="text-2xl font-bold text-black">과거 신청 내역</h2>
+              <div className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/icons/체크.png"
+                  alt="체크"
+                  width={30}
+                  height={30}
+                  className="w-7 h-7"
+                />
+                <h2 className="text-[20px] font-[800] text-black">과거 신청 내역</h2>
               </div>
 
               {/* 예시 과거 모임 카드 */}
               <div className="bg-[#E1E1E1] rounded-2xl p-6 relative">
-                <h3 className="text-xl font-bold text-black mb-3">무역 영어 공부</h3>
-                <div className="space-y-2 text-sm text-black">
+                <h3 className="text-[20px] font-[800] text-black mb-3">무역 영어 공부</h3>
+                <div className="space-y-1 text-black">
                   <div className="flex items-center gap-2">
-                    <span className="text-[#7F2323]">📅</span>
-                    <span>날짜: 9월 19일 18:00 - 20:00</span>
+                    <Image src="/icons/알람시계.png" alt="시계" width={20} height={20} className="w-5 h-5" />
+                    <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 19일 18:00 - 20:00</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[#7F2323]">📍</span>
-                    <span>장소: 누리관</span>
+                    <Image src="/icons/깃발.png" alt="장소" width={20} height={20} className="w-5 h-5" />
+                    <span className="text-[16px] font-[500] leading-[30px]">장소: 누리관</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[#7F2323]">📋</span>
-                    <span>상태: 마감</span>
+                    <Image src="/icons/책.png" alt="상태" width={20} height={20} className="w-5 h-5" />
+                    <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                   </div>
                 </div>
                 <button className="absolute top-6 right-6 bg-black text-white p-3 rounded-lg hover:bg-gray-800 transition-colors">
@@ -241,7 +253,7 @@ export default function Home() {
       <footer className="mt-12 px-12 py-8">
         <div className="max-w-[1440px] mx-auto flex items-center gap-4">
           <Image
-            src="/icons/로고.png"
+            src="/icons/뉴 로고.png"
             alt="Kwangwoon University"
             width={60}
             height={60}
