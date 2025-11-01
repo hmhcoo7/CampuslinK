@@ -95,7 +95,7 @@ export default function Home() {
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src="/icons/로고.png"
+              src="/icons/logo.png"
               alt="CampusLinK Logo"
               className="w-6 h-6"
             />
@@ -222,7 +222,7 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
+                <div className="w-[1px] h-[444px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
 
                 {/* 오른쪽 - 학과 목록 */}
                 <div className="flex-1">
