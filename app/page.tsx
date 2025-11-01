@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 8, 1)) // 2025년 9월
+  const [isLiked, setIsLiked] = useState(false) // 하트 버튼 상태
 
   // 캘린더 날짜 생성
   const getDaysInMonth = (date: Date) => {
@@ -236,8 +237,18 @@ export default function Home() {
                     <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                   </div>
                 </div>
-                <button className="absolute top-6 right-6 bg-black text-white p-3 rounded-lg hover:bg-gray-800 transition-colors">
-                  ❤️
+                <button
+                  onClick={() => setIsLiked(!isLiked)}
+                  className={`absolute top-6 right-6 flex justify-center items-center w-[105px] h-[51px] rounded-lg border transition-all ${
+                    isLiked
+                      ? 'bg-[#2C2C2C] border-[#2C2C2C]'
+                      : 'bg-white border-[#2C2C2C]'
+                  }`}
+                  style={{ aspectRatio: '35/17' }}
+                >
+                  <span className={`text-2xl ${isLiked ? 'text-white' : 'text-black'}`}>
+                    ❤️
+                  </span>
                 </button>
               </div>
             </div>
@@ -251,7 +262,8 @@ export default function Home() {
           <img
             src="/icons/kwangwoon-logo.png"
             alt="Kwangwoon University"
-            className="w-15 h-15"
+            className="w-[164px] h-[48px] object-cover"
+            style={{ aspectRatio: '41/12' }}
           />
           <div className="text-sm text-black">
             <p className="font-bold text-[#7F2323]">광운대학교</p>
