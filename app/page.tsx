@@ -155,7 +155,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src="/icons/옆 화살표.png"
+                  src="/icons/arrow-right.png"
                   alt="SOON"
                   className="w-7 h-7"
                 />
@@ -168,15 +168,15 @@ export default function Home() {
                   <h3 className="text-[20px] font-[800] text-black mb-3">자료구조 스터디</h3>
                   <div className="space-y-1 text-black">
                     <div className="flex items-center gap-2">
-                      <img src="/icons/알람시계.png" alt="시계" className="w-5 h-5" />
+                      <img src="/icons/clock.png" alt="시계" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 21일 17:00 - 19:00</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <img src="/icons/깃발.png" alt="장소" className="w-5 h-5" />
+                      <img src="/icons/flag.png" alt="장소" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">장소: 비마관</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <img src="/icons/책.png" alt="상태" className="w-5 h-5" />
+                      <img src="/icons/book.png" alt="상태" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">상태: 모집중</span>
                     </div>
                   </div>
@@ -189,15 +189,15 @@ export default function Home() {
                   <h3 className="text-[20px] font-[800] text-black mb-3">영어 회화</h3>
                   <div className="space-y-1 text-black">
                     <div className="flex items-center gap-2">
-                      <img src="/icons/알람시계.png" alt="시계" className="w-5 h-5" />
+                      <img src="/icons/clock.png" alt="시계" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 24일 18:00 - 21:00</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <img src="/icons/깃발.png" alt="장소" className="w-5 h-5" />
+                      <img src="/icons/flag.png" alt="장소" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">장소: 한울관</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <img src="/icons/책.png" alt="상태" className="w-5 h-5" />
+                      <img src="/icons/book.png" alt="상태" className="w-5 h-5" />
                       <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                     </div>
                   </div>
@@ -212,7 +212,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <img
-                  src="/icons/체크.png"
+                  src="/icons/check.png"
                   alt="체크"
                   className="w-7 h-7"
                 />
@@ -224,15 +224,15 @@ export default function Home() {
                 <h3 className="text-[20px] font-[800] text-black mb-3">무역 영어 공부</h3>
                 <div className="space-y-1 text-black">
                   <div className="flex items-center gap-2">
-                    <img src="/icons/알람시계.png" alt="시계" className="w-5 h-5" />
+                    <img src="/icons/clock.png" alt="시계" className="w-5 h-5" />
                     <span className="text-[16px] font-[500] leading-[30px]">날짜: 9월 19일 18:00 - 20:00</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <img src="/icons/깃발.png" alt="장소" className="w-5 h-5" />
+                    <img src="/icons/flag.png" alt="장소" className="w-5 h-5" />
                     <span className="text-[16px] font-[500] leading-[30px]">장소: 누리관</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <img src="/icons/책.png" alt="상태" className="w-5 h-5" />
+                    <img src="/icons/book.png" alt="상태" className="w-5 h-5" />
                     <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                   </div>
                 </div>
@@ -249,7 +249,7 @@ export default function Home() {
       <footer className="mt-12 px-12 py-8">
         <div className="max-w-[1440px] mx-auto flex items-center gap-4">
           <img
-            src="/icons/뉴 로고.png"
+            src="/icons/kwangwoon-logo.png"
             alt="Kwangwoon University"
             className="w-15 h-15"
           />
