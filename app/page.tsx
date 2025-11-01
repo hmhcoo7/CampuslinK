@@ -7,6 +7,19 @@ import Link from 'next/link'
 export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 8, 1)) // 2025년 9월
   const [isLiked, setIsLiked] = useState(false) // 하트 버튼 상태
+  const [isMajorDropdownOpen, setIsMajorDropdownOpen] = useState(false) // 전공 드롭다운 상태
+  const [selectedCollege, setSelectedCollege] = useState<string | null>(null) // 선택된 단과대
+
+  // 단과대-학과 데이터
+  const collegeData: { [key: string]: string[] } = {
+    '전자정보공과대학': ['전자공학과', '전자통신공학과', '전자융합공학과', '전기공학과', '전자재료공학과', '반도체시스템공학부'],
+    '인공지능융합대학': ['컴퓨터정보공학부', '소프트웨어학부', '정보융합학부', '로봇학부', '지능형로봇학과'],
+    '공과대학': ['화학공학과', '환경공학과', '건축공학과', '건축학과'],
+    '자연과학대학': ['수학과', '화학과', '전자바이오물리학과', '정보콘텐츠학과', '스포츠융합과학과'],
+    '인문사회과학대학': ['국어국문학과', '영어산업학과', '산업심리학과', '미디어커뮤니케이션학부', '동북아문화산업학부'],
+    '정책법학대학': ['행정학과', '법학부', '자산관리학과', '국제학부', '글로벌지속가능융합학과'],
+    '경영대학': ['경영학부', '국제통상학부']
+  }
 
   // 캘린더 날짜 생성
   const getDaysInMonth = (date: Date) => {
@@ -57,7 +70,15 @@ export default function Home() {
           </div>
 
           <nav className="flex items-center gap-8">
-            <Link href="/major" className="hover:opacity-80">전공</Link>
+            <button
+              onClick={() => {
+                setIsMajorDropdownOpen(!isMajorDropdownOpen)
+                setSelectedCollege(null)
+              }}
+              className="hover:opacity-80"
+            >
+              전공
+            </button>
             <Link href="/contest" className="hover:opacity-80">공모전</Link>
             <Link href="/certificate" className="hover:opacity-80">자격증</Link>
             <Link href="/etc" className="hover:opacity-80">기타</Link>
@@ -79,6 +100,67 @@ export default function Home() {
           </nav>
         </div>
       </header>
+
+      {/* 전공 카테고리 드롭다운 */}
+      {isMajorDropdownOpen && (
+        <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="flex gap-0">
+              {/* 왼쪽 - 단과대 목록 */}
+              <div className="w-[382px] flex-shrink-0">
+                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] mb-4">
+                  단과대 &gt;
+                </h3>
+                <div className="space-y-0">
+                  {Object.keys(collegeData).map((college) => (
+                    <button
+                      key={college}
+                      onClick={() => setSelectedCollege(college)}
+                      className={`w-full text-left px-4 py-1 font-semibold text-[16px] leading-[30px] transition-colors ${
+                        selectedCollege === college
+                          ? 'text-black'
+                          : 'text-[#595959]'
+                      }`}
+                      style={{ fontFamily: 'Inter' }}
+                    >
+                      {college}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 세로 구분선 */}
+              <div className="w-[1px] bg-black mx-8"></div>
+
+              {/* 오른쪽 - 학과 목록 */}
+              <div className="flex-1">
+                <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] mb-4">
+                  학과 &gt;
+                </h3>
+                {selectedCollege ? (
+                  <div className="space-y-0">
+                    {collegeData[selectedCollege].map((department) => (
+                      <button
+                        key={department}
+                        onClick={() => {
+                          // 나중에 모임 목록 페이지로 이동
+                          console.log(`선택된 학과: ${department}`)
+                        }}
+                        className="block w-full text-left px-4 py-1 text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                        style={{ fontFamily: 'Inter' }}
+                      >
+                        {department}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[#595959] text-[16px] px-4">단과대를 선택해주세요</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="max-w-[1440px] mx-auto px-12 py-8">
