@@ -181,7 +181,10 @@ export default function Home() {
                       <span className="text-[16px] font-[500] leading-[30px]">상태: 모집중</span>
                     </div>
                   </div>
-                  <button className="absolute top-6 right-6 bg-[#B7B7B7] text-white px-6 py-2 rounded-lg hover:bg-[#7F2323] transition-colors">
+                  <button
+                    className="absolute top-1/2 -translate-y-1/2 right-6 flex justify-center items-center w-[105px] h-[51px] bg-[#B7B7B7] text-white rounded-lg border border-[#7F2323] hover:bg-[#7F2323] transition-colors"
+                    style={{ aspectRatio: '35/17' }}
+                  >
                     신청하기
                   </button>
                 </div>
@@ -202,7 +205,10 @@ export default function Home() {
                       <span className="text-[16px] font-[500] leading-[30px]">상태: 마감</span>
                     </div>
                   </div>
-                  <button className="absolute top-6 right-6 bg-[#B7B7B7] text-white px-6 py-2 rounded-lg hover:bg-[#7F2323] transition-colors">
+                  <button
+                    className="absolute top-1/2 -translate-y-1/2 right-6 flex justify-center items-center w-[105px] h-[51px] bg-[#B7B7B7] text-white rounded-lg border border-[#7F2323] hover:bg-[#7F2323] transition-colors"
+                    style={{ aspectRatio: '35/17' }}
+                  >
                     신청하기
                   </button>
                 </div>
@@ -239,15 +245,15 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => setIsLiked(!isLiked)}
-                  className={`absolute top-6 right-6 flex justify-center items-center w-[105px] h-[51px] rounded-lg border transition-all ${
+                  className={`absolute top-1/2 -translate-y-1/2 right-6 flex justify-center items-center w-[105px] h-[51px] rounded-lg border border-[#7F2323] transition-all ${
                     isLiked
-                      ? 'bg-[#2C2C2C] border-[#2C2C2C]'
-                      : 'bg-white border-[#2C2C2C]'
+                      ? 'bg-[#2C2C2C]'
+                      : 'bg-white'
                   }`}
                   style={{ aspectRatio: '35/17' }}
                 >
-                  <span className={`text-2xl ${isLiked ? 'text-white' : 'text-black'}`}>
-                    ❤️
+                  <span className={`text-xl ${isLiked ? 'text-white' : 'text-black'}`}>
+                    ♥
                   </span>
                 </button>
               </div>
