@@ -94,10 +94,13 @@ export default function Home() {
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img
-              src="/icons/logo.png?v=2"
+            <Image
+              src="/icons/logo.png"
               alt="CampusLinK Logo"
+              width={24}
+              height={24}
               className="w-6 h-6"
+              priority
             />
             <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
               Campus<br/>LinK
