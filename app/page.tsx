@@ -15,6 +15,7 @@ export default function Home() {
   const [selectedContest, setSelectedContest] = useState<string | null>(null) // 선택된 공모전
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null) // 선택된 자격증
   const [selectedEtc, setSelectedEtc] = useState<string | null>(null) // 선택된 기타
+  const [selectedClubDivision, setSelectedClubDivision] = useState<string | null>(null) // 선택된 중앙동아리 소속
 
   // 단과대-학과 데이터
   const collegeData: { [key: string]: string[] } = {
@@ -50,13 +51,71 @@ export default function Home() {
     '언어/국제'
   ]
 
-  // 기타 카테고리 데이터
-  const etcData: string[] = [
-    '예술',
-    '운동',
-    '지식',
-    '힐링'
-  ]
+  // 기타 카테고리 데이터 (중앙동아리)
+  const clubData: { [key: string]: Array<{ name: string; field: string }> } = {
+    '공연예술분과': [
+      { name: '14Fret', field: '밴드' },
+      { name: '광운극예술연구회', field: '연극' },
+      { name: '노을', field: '밴드' },
+      { name: '여섯소리', field: '아카펠라' },
+      { name: 'C-spot', field: '댄스' },
+      { name: 'Da.KAPO', field: '오케스트라' },
+      { name: 'K-ME', field: '뮤지컬' },
+      { name: 'Pegasus', field: '밴드' },
+      { name: 'Phoebus', field: '밴드' },
+      { name: 'Trick', field: '마술' }
+    ],
+    '문화분과': [
+      { name: '만화동아리 CIA', field: '만화' },
+      { name: '33&1/3 RPM', field: '음악감상' },
+      { name: 'KAPA', field: '사진' },
+      { name: 'PUB', field: '방송' },
+      { name: '보해미안', field: '문화예술' }
+    ],
+    '종교봉사분과': [
+      { name: 'IVF', field: '기독교' },
+      { name: 'RCY', field: '봉사' },
+      { name: '네비게이토선교회', field: '기독교' },
+      { name: '세상사람들', field: '기독교' },
+      { name: 'DO-WITH', field: '봉사' },
+      { name: 'CCC', field: '기독교' }
+    ],
+    '체육1분과': [
+      { name: 'KABA', field: '농구' },
+      { name: 'KWTC', field: '테니스' },
+      { name: 'KATT', field: '탁구' },
+      { name: '아이스유니콘스', field: '아이스하키' },
+      { name: 'KAFA', field: '축구' },
+      { name: '예인회', field: '당구' },
+      { name: '아마야구반', field: '야구' },
+      { name: 'KWWS', field: '윈드서핑' }
+    ],
+    '체육2분과': [
+      { name: '아마유도부', field: '유도' },
+      { name: '블랙샤크', field: '다이빙' },
+      { name: '검도부', field: '검도' },
+      { name: '블레이드러너', field: '인라인' },
+      { name: '산악부', field: '등산' },
+      { name: '스키부', field: '스키' },
+      { name: '기우회', field: '합기도' },
+      { name: '천운', field: '태권도' }
+    ],
+    '학술분과': [
+      { name: '문학동우회', field: '문학' },
+      { name: '블랙썬', field: '보안' },
+      { name: 'Blackcat', field: '보안' },
+      { name: 'SELA', field: '영어회화' },
+      { name: 'TIME', field: '영어회화' },
+      { name: '전자연구회', field: '전자공학' },
+      { name: 'K-NET', field: '네트워크' },
+      { name: '제로비', field: '창업' },
+      { name: 'ROLAB', field: '로봇' },
+      { name: "COM's", field: '컴퓨터' },
+      { name: 'FOVU', field: '사진영상' },
+      { name: 'KUIS', field: '정보보안' },
+      { name: 'AWOS', field: '오픈소스' }
+    ]
+  }
 
   // 캘린더 날짜 생성
   const getDaysInMonth = (date: Date) => {
@@ -166,7 +225,7 @@ export default function Home() {
                   setIsMajorDropdownOpen(false)
                   setIsContestDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
-                  setSelectedEtc(null)
+                  setSelectedClubDivision(null)
                 }}
                 className="hover:opacity-80"
               >
@@ -314,29 +373,60 @@ export default function Home() {
         </div>
       )}
 
-      {/* 기타 카테고리 드롭다운 */}
+      {/* 기타 카테고리 드롭다운 (중앙동아리) */}
       {isEtcDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
-              <div className="space-y-0 flex flex-col items-center">
-                {etcData.map((etc) => (
-                  <button
-                    key={etc}
-                    onClick={() => {
-                      setSelectedEtc(etc)
-                      console.log(`선택된 기타: ${etc}`)
-                    }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
-                      selectedEtc === etc
-                        ? 'text-black'
-                        : 'text-[#595959]'
-                    }`}
-                    style={{ fontFamily: 'Inter' }}
-                  >
-                    {etc}
-                  </button>
-                ))}
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="flex gap-0 items-start">
+                {/* 왼쪽 - 중앙동아리 소속 목록 */}
+                <div className="flex-1">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2">
+                    중앙동아리소속 &gt;
+                  </h3>
+                  <div className="space-y-0 ml-8">
+                    {Object.keys(clubData).map((division) => (
+                      <button
+                        key={division}
+                        onClick={() => setSelectedClubDivision(division)}
+                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors ${
+                          selectedClubDivision === division
+                            ? 'text-black'
+                            : 'text-[#595959]'
+                        }`}
+                        style={{ fontFamily: 'Inter' }}
+                      >
+                        {division}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 세로 구분선 */}
+                <div className="w-[1px] h-[444px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
+
+                {/* 오른쪽 - 중앙동아리명 목록 */}
+                <div className="flex-1">
+                  <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2">
+                    중앙동아리명 &gt;
+                  </h3>
+                  {selectedClubDivision ? (
+                    <div className="space-y-0 ml-8">
+                      {clubData[selectedClubDivision].map((club) => (
+                        <button
+                          key={club.name}
+                          onClick={() => {
+                            console.log(`선택된 동아리: ${club.name} (${club.field})`)
+                          }}
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                          style={{ fontFamily: 'Inter' }}
+                        >
+                          {club.name} ({club.field})
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
