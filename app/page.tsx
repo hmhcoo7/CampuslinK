@@ -298,7 +298,7 @@ export default function Home() {
                             // 나중에 모임 목록 페이지로 이동
                             console.log(`선택된 학과: ${department}`)
                           }}
-                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors"
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
                         >
                           {department}
