@@ -376,13 +376,13 @@ export default function Home() {
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
             <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
-              <div className="flex gap-0 h-full">
+              <div className="flex gap-0 items-start h-[444px]">
                 {/* 왼쪽 - 중앙동아리 소속 목록 */}
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1">
                   <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2 whitespace-nowrap">
                     중앙동아리소속 &gt;
                   </h3>
-                  <div className="space-y-0 ml-8 overflow-y-auto flex-1">
+                  <div className="space-y-0 ml-8">
                     {Object.keys(clubData).map((division) => (
                       <button
                         key={division}
@@ -401,15 +401,15 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-full bg-[#7F2323] flex-shrink-0 mx-4"></div>
+                <div className="w-[1px] h-[444px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
 
                 {/* 오른쪽 - 중앙동아리명 목록 */}
-                <div className="flex-1 flex flex-col">
+                <div className="flex-1">
                   <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2 whitespace-nowrap">
                     중앙동아리명 &gt;
                   </h3>
                   {selectedClubDivision ? (
-                    <div className="space-y-0 ml-8 overflow-y-auto flex-1">
+                    <div className="space-y-0 ml-8">
                       {clubData[selectedClubDivision].map((club) => (
                         <button
                           key={club.name}
