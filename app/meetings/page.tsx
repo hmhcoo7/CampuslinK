@@ -110,7 +110,7 @@ export default function MeetingsPage() {
         <div className="flex items-center gap-3 text-[#595959]">
           <Link href="/">
             <Image
-              src="/icons/home.svg"
+              src="/icons/Home.svg"
               alt="Home"
               width={24}
               height={24}
@@ -122,12 +122,24 @@ export default function MeetingsPage() {
           <span className="text-xl">&gt;</span>
           <button className="font-semibold flex items-center gap-1">
             전자정보공과대학
-            <span className="text-sm">▼</span>
+            <Image
+              src="/icons/keyboard_arrow_down.svg"
+              alt="dropdown"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
           </button>
           <span className="text-xl">&gt;</span>
           <button className="font-semibold flex items-center gap-1">
             전자공학과
-            <span className="text-sm">▼</span>
+            <Image
+              src="/icons/keyboard_arrow_down.svg"
+              alt="dropdown"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
           </button>
         </div>
       </div>
@@ -201,7 +213,7 @@ export default function MeetingsPage() {
                     {/* Meeting Info */}
                     <div className="flex items-center gap-2 text-[#595959]">
                       <Image
-                        src="/icons/clock.png"
+                        src="/icons/today.svg"
                         alt="시간"
                         width={20}
                         height={20}
@@ -212,7 +224,7 @@ export default function MeetingsPage() {
 
                     <div className="flex items-center gap-2 text-[#595959]">
                       <Image
-                        src="/icons/flag.png"
+                        src="/icons/location_on.svg"
                         alt="장소"
                         width={20}
                         height={20}
@@ -223,7 +235,7 @@ export default function MeetingsPage() {
 
                     <div className="flex items-center gap-2 text-[#595959]">
                       <Image
-                        src="/icons/people.svg"
+                        src="/icons/gmail_groups.svg"
                         alt="인원"
                         width={20}
                         height={20}
@@ -251,8 +263,14 @@ export default function MeetingsPage() {
       </main>
 
       {/* Floating Action Button */}
-      <button className="fixed bottom-12 right-12 w-[120px] h-[120px] bg-[#7F2323] rounded-full flex flex-col items-center justify-center text-white shadow-lg hover:bg-[#6B1E1E] transition-colors">
-        <div className="text-5xl mb-1">+</div>
+      <button className="fixed bottom-12 right-12 w-[120px] h-[120px] bg-[#7F2323] rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-[#6B1E1E] transition-colors">
+        <Image
+          src="/icons/add_circle.svg"
+          alt="추가"
+          width={48}
+          height={48}
+          className="w-12 h-12 mb-1"
+        />
         <div className="text-sm font-semibold">모임 생성하기</div>
       </button>
 
