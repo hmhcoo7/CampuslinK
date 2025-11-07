@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   const [currentDate, setCurrentDate] = useState(new Date(2025, 8, 1)) // 2025년 9월
   const [isLiked, setIsLiked] = useState(false) // 하트 버튼 상태
   const [isMajorDropdownOpen, setIsMajorDropdownOpen] = useState(false) // 전공 드롭다운 상태
@@ -282,7 +284,7 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[444px] bg-[#7F2323] flex-shrink-0 mx-4"></div>
+                <div className="h-[444px] flex-shrink-0 mx-4 border-l border-[#7F2323]"></div>
 
                 {/* 오른쪽 - 학과 목록 */}
                 <div className="flex-1">
@@ -295,8 +297,7 @@ export default function Home() {
                         <button
                           key={department}
                           onClick={() => {
-                            // 나중에 모임 목록 페이지로 이동
-                            console.log(`선택된 학과: ${department}`)
+                            router.push('/meetings')
                           }}
                           className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
@@ -323,8 +324,7 @@ export default function Home() {
                   <button
                     key={contest}
                     onClick={() => {
-                      setSelectedContest(contest)
-                      console.log(`선택된 공모전: ${contest}`)
+                      router.push('/meetings')
                     }}
                     className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedContest === contest
@@ -352,8 +352,7 @@ export default function Home() {
                   <button
                     key={certificate}
                     onClick={() => {
-                      setSelectedCertificate(certificate)
-                      console.log(`선택된 자격증: ${certificate}`)
+                      router.push('/meetings')
                     }}
                     className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedCertificate === certificate
@@ -375,10 +374,10 @@ export default function Home() {
       {isEtcDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 relative">
-              <div className="absolute inset-0 flex gap-0">
+            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0">
+              <div className="flex gap-0 items-start">
                 {/* 왼쪽 - 중앙동아리 소속 목록 */}
-                <div className="w-[191px]">
+                <div className="flex-1">
                   <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2 whitespace-nowrap">
                     중앙동아리소속 &gt;
                   </h3>
@@ -401,10 +400,10 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-full bg-[#7F2323] flex-shrink-0"></div>
+                <div className="h-[444px] flex-shrink-0 mx-4 border-l border-[#7F2323]"></div>
 
                 {/* 오른쪽 - 중앙동아리명 목록 */}
-                <div className="w-[190px] ml-4">
+                <div className="flex-1">
                   <h3 className="text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 ml-2 whitespace-nowrap">
                     중앙동아리명 &gt;
                   </h3>
@@ -414,7 +413,7 @@ export default function Home() {
                         <button
                           key={club.name}
                           onClick={() => {
-                            console.log(`선택된 동아리: ${club.name} (${club.field})`)
+                            router.push('/meetings')
                           }}
                           className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
