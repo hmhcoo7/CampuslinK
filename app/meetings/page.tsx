@@ -117,28 +117,46 @@ export default function MeetingsPage() {
               className="w-6 h-6"
             />
           </Link>
-          <span className="text-xl">&gt;</span>
+          <Image
+            src="/icons/Chevron right.svg"
+            alt="chevron"
+            width={20}
+            height={20}
+            className="w-5 h-5"
+          />
           <span className="font-semibold">전공</span>
-          <span className="text-xl">&gt;</span>
+          <Image
+            src="/icons/Chevron right.svg"
+            alt="chevron"
+            width={20}
+            height={20}
+            className="w-5 h-5"
+          />
           <button className="font-semibold flex items-center gap-1">
             전자정보공과대학
             <Image
-              src="/icons/keyboard_arrow_down.svg"
+              src="/icons/arrow_drop_down.svg"
               alt="dropdown"
-              width={16}
-              height={16}
-              className="w-4 h-4"
+              width={20}
+              height={20}
+              className="w-5 h-5"
             />
           </button>
-          <span className="text-xl">&gt;</span>
+          <Image
+            src="/icons/Chevron right.svg"
+            alt="chevron"
+            width={20}
+            height={20}
+            className="w-5 h-5"
+          />
           <button className="font-semibold flex items-center gap-1">
             전자공학과
             <Image
-              src="/icons/keyboard_arrow_down.svg"
+              src="/icons/arrow_drop_down.svg"
               alt="dropdown"
-              width={16}
-              height={16}
-              className="w-4 h-4"
+              width={20}
+              height={20}
+              className="w-5 h-5"
             />
           </button>
         </div>
@@ -150,33 +168,54 @@ export default function MeetingsPage() {
         <div className="flex items-center gap-4 mb-8">
           <button
             onClick={() => setSelectedFilter(selectedFilter === '날짜' ? null : '날짜')}
-            className={`px-6 py-2 rounded-full font-semibold transition-colors ${
+            className={`px-6 py-2 rounded-full font-semibold transition-colors flex items-center gap-1 ${
               selectedFilter === '날짜'
                 ? 'bg-[#595959] text-white'
                 : 'bg-[#D9D9D9] text-black'
             }`}
           >
-            날짜 ▼
+            날짜
+            <Image
+              src="/icons/arrow_drop_down.svg"
+              alt="dropdown"
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
           </button>
           <button
             onClick={() => setSelectedFilter(selectedFilter === '장소' ? null : '장소')}
-            className={`px-6 py-2 rounded-full font-semibold transition-colors ${
+            className={`px-6 py-2 rounded-full font-semibold transition-colors flex items-center gap-1 ${
               selectedFilter === '장소'
                 ? 'bg-[#595959] text-white'
                 : 'bg-[#D9D9D9] text-black'
             }`}
           >
-            장소 ▼
+            장소
+            <Image
+              src="/icons/arrow_drop_down.svg"
+              alt="dropdown"
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
           </button>
           <button
             onClick={() => setSelectedFilter(selectedFilter === '장기' ? null : '장기')}
-            className={`px-6 py-2 rounded-full font-semibold transition-colors ${
+            className={`px-6 py-2 rounded-full font-semibold transition-colors flex items-center gap-1 ${
               selectedFilter === '장기'
                 ? 'bg-[#595959] text-white'
                 : 'bg-[#D9D9D9] text-black'
             }`}
           >
-            장기 ▼
+            장기
+            <Image
+              src="/icons/arrow_drop_down.svg"
+              alt="dropdown"
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
           </button>
         </div>
 
@@ -201,10 +240,10 @@ export default function MeetingsPage() {
                   <div className="flex items-center gap-6">
                     {/* Status Badge */}
                     <div
-                      className={`px-6 py-2 rounded-full font-semibold ${
+                      className={`px-6 py-2 rounded-full font-semibold text-black ${
                         meeting.status === '모집중'
-                          ? 'bg-[#AD7070] text-white'
-                          : 'bg-[#A4A4A4] text-white'
+                          ? 'bg-[#AD7070]'
+                          : 'bg-[#A4A4A4]'
                       }`}
                     >
                       {meeting.status}
