@@ -307,7 +307,7 @@ export default function Home() {
                   <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
                     단과대 &gt;
                   </h3>
-                  <div className="w-[382px] h-[444px] space-y-0">
+                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(collegeData).map((college) => (
                       <button
                         key={college}
@@ -326,7 +326,7 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
 
                 {/* 오른쪽 - 학과 목록 */}
                 <div className="flex-shrink-0">
@@ -334,7 +334,7 @@ export default function Home() {
                     학과 &gt;
                   </h3>
                   {selectedCollege ? (
-                    <div className="w-[386px] h-[376px] space-y-0">
+                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
                       {collegeData[selectedCollege].map((department) => (
                         <button
                           key={department}
@@ -360,7 +360,7 @@ export default function Home() {
       {isContestDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
+            <div className="w-[382px] max-h-[300px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {contestData.map((contest) => (
                   <button
@@ -388,7 +388,7 @@ export default function Home() {
       {isCertificateDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] h-[444px] mx-auto flex-shrink-0 flex items-center justify-center">
+            <div className="w-[382px] max-h-[300px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {certificateData.map((certificate) => (
                   <button
@@ -423,7 +423,7 @@ export default function Home() {
                   <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
                     중앙동아리소속 &gt;
                   </h3>
-                  <div className="w-[382px] h-[444px] space-y-0">
+                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(clubData).map((division) => (
                       <button
                         key={division}
@@ -442,7 +442,7 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
 
                 {/* 오른쪽 - 중앙동아리명 목록 */}
                 <div className="flex-shrink-0">
@@ -450,7 +450,7 @@ export default function Home() {
                     중앙동아리명 &gt;
                   </h3>
                   {selectedClubDivision ? (
-                    <div className="w-[386px] h-[376px] space-y-0">
+                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
                       {clubData[selectedClubDivision].map((club) => (
                         <button
                           key={club.name}
@@ -483,7 +483,7 @@ export default function Home() {
                   <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
                     활동 유형 &gt;
                   </h3>
-                  <div className="w-[382px] h-[444px] space-y-0">
+                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(etcData).map((activityType) => (
                       <button
                         key={activityType}
@@ -502,7 +502,7 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
 
                 {/* 오른쪽 - 세부 활동 분야 목록 */}
                 <div className="flex-shrink-0">
@@ -510,7 +510,7 @@ export default function Home() {
                     세부 활동 분야 &gt;
                   </h3>
                   {selectedActivityType ? (
-                    <div className="w-[386px] h-[376px] space-y-0">
+                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
                       {etcData[selectedActivityType].map((field) => (
                         <button
                           key={field}
