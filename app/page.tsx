@@ -183,7 +183,11 @@ export default function Home() {
                   setIsCertificateDropdownOpen(false)
                   setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
-                  setSelectedCollege(null)
+                  // 초기 선택 설정
+                  if (!isMajorDropdownOpen) {
+                    const firstCollege = Object.keys(collegeData)[0]
+                    setSelectedCollege(firstCollege)
+                  }
                 }}
                 className="hover:opacity-80"
               >
@@ -237,7 +241,11 @@ export default function Home() {
                   setIsContestDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
-                  setSelectedClubDivision(null)
+                  // 초기 선택 설정
+                  if (!isClubDropdownOpen) {
+                    const firstDivision = Object.keys(clubData)[0]
+                    setSelectedClubDivision(firstDivision)
+                  }
                 }}
                 className="hover:opacity-80"
               >
@@ -255,7 +263,11 @@ export default function Home() {
                   setIsContestDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
                   setIsClubDropdownOpen(false)
-                  setSelectedActivityType(null)
+                  // 초기 선택 설정
+                  if (!isEtcDropdownOpen) {
+                    const firstActivityType = Object.keys(etcData)[0]
+                    setSelectedActivityType(firstActivityType)
+                  }
                 }}
                 className="hover:opacity-80"
               >
