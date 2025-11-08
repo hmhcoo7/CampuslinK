@@ -12,12 +12,13 @@ export default function Home() {
   const [isMajorDropdownOpen, setIsMajorDropdownOpen] = useState(false) // 전공 드롭다운 상태
   const [isContestDropdownOpen, setIsContestDropdownOpen] = useState(false) // 공모전 드롭다운 상태
   const [isCertificateDropdownOpen, setIsCertificateDropdownOpen] = useState(false) // 자격증 드롭다운 상태
+  const [isClubDropdownOpen, setIsClubDropdownOpen] = useState(false) // 동아리 드롭다운 상태
   const [isEtcDropdownOpen, setIsEtcDropdownOpen] = useState(false) // 기타 드롭다운 상태
   const [selectedCollege, setSelectedCollege] = useState<string | null>(null) // 선택된 단과대
   const [selectedContest, setSelectedContest] = useState<string | null>(null) // 선택된 공모전
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null) // 선택된 자격증
-  const [selectedEtc, setSelectedEtc] = useState<string | null>(null) // 선택된 기타
   const [selectedClubDivision, setSelectedClubDivision] = useState<string | null>(null) // 선택된 중앙동아리 소속
+  const [selectedActivityType, setSelectedActivityType] = useState<string | null>(null) // 선택된 활동 유형
 
   // 단과대-학과 데이터
   const collegeData: { [key: string]: string[] } = {
@@ -53,7 +54,14 @@ export default function Home() {
     '언어/국제'
   ]
 
-  // 기타 카테고리 데이터 (중앙동아리)
+  // 기타 카테고리 데이터 (활동 유형)
+  const etcData: { [key: string]: string[] } = {
+    '취미': ['운동', '음악', '미술', '요리'],
+    '봉사': ['교육봉사', '환경봉사', '복지봉사', '재능기부'],
+    '기타': ['자기개발', '교양활동', '취업스터디']
+  }
+
+  // 동아리 카테고리 데이터 (중앙동아리)
   const clubData: { [key: string]: Array<{ name: string; field: string }> } = {
     '공연예술분과': [
       { name: '14Fret', field: '밴드' },
@@ -173,6 +181,7 @@ export default function Home() {
                   setIsMajorDropdownOpen(!isMajorDropdownOpen)
                   setIsContestDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
+                  setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
                   setSelectedCollege(null)
                 }}
@@ -190,6 +199,7 @@ export default function Home() {
                   setIsContestDropdownOpen(!isContestDropdownOpen)
                   setIsMajorDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
+                  setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
                   setSelectedContest(null)
                 }}
@@ -207,6 +217,7 @@ export default function Home() {
                   setIsCertificateDropdownOpen(!isCertificateDropdownOpen)
                   setIsMajorDropdownOpen(false)
                   setIsContestDropdownOpen(false)
+                  setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
                   setSelectedCertificate(null)
                 }}
@@ -221,11 +232,30 @@ export default function Home() {
             <div className="relative">
               <button
                 onClick={() => {
+                  setIsClubDropdownOpen(!isClubDropdownOpen)
+                  setIsMajorDropdownOpen(false)
+                  setIsContestDropdownOpen(false)
+                  setIsCertificateDropdownOpen(false)
+                  setIsEtcDropdownOpen(false)
+                  setSelectedClubDivision(null)
+                }}
+                className="hover:opacity-80"
+              >
+                동아리
+              </button>
+              {isClubDropdownOpen && (
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+              )}
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => {
                   setIsEtcDropdownOpen(!isEtcDropdownOpen)
                   setIsMajorDropdownOpen(false)
                   setIsContestDropdownOpen(false)
                   setIsCertificateDropdownOpen(false)
-                  setSelectedClubDivision(null)
+                  setIsClubDropdownOpen(false)
+                  setSelectedActivityType(null)
                 }}
                 className="hover:opacity-80"
               >
@@ -370,8 +400,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* 기타 카테고리 드롭다운 (중앙동아리) */}
-      {isEtcDropdownOpen && (
+      {/* 동아리 카테고리 드롭다운 (중앙동아리) */}
+      {isClubDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
             <div className="mx-auto flex-shrink-0 flex justify-center">
@@ -419,6 +449,66 @@ export default function Home() {
                           style={{ fontFamily: 'Inter' }}
                         >
                           {club.name} ({club.field})
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 기타 카테고리 드롭다운 (활동 유형) */}
+      {isEtcDropdownOpen && (
+        <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
+          <div className="max-w-[1440px] mx-auto px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center">
+              <div className="flex gap-0 items-start">
+                {/* 왼쪽 - 활동 유형 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                    활동 유형 &gt;
+                  </h3>
+                  <div className="w-[382px] h-[444px] space-y-0">
+                    {Object.keys(etcData).map((activityType) => (
+                      <button
+                        key={activityType}
+                        onClick={() => setSelectedActivityType(activityType)}
+                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
+                          selectedActivityType === activityType
+                            ? 'text-black'
+                            : 'text-[#595959]'
+                        }`}
+                        style={{ fontFamily: 'Inter' }}
+                      >
+                        {activityType}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 세로 구분선 */}
+                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+
+                {/* 오른쪽 - 세부 활동 분야 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
+                    세부 활동 분야 &gt;
+                  </h3>
+                  {selectedActivityType ? (
+                    <div className="w-[386px] h-[376px] space-y-0">
+                      {etcData[selectedActivityType].map((field) => (
+                        <button
+                          key={field}
+                          onClick={() => {
+                            router.push('/meetings')
+                          }}
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
+                          style={{ fontFamily: 'Inter' }}
+                        >
+                          {field}
                         </button>
                       ))}
                     </div>
