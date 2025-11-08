@@ -1,10 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 export default function MeetingsPage() {
+  const searchParams = useSearchParams()
+
   // 브래드크럼 상태
   const [selectedCategory, setSelectedCategory] = useState('전공')
   const [selectedLeftSubcategory, setSelectedLeftSubcategory] = useState('전자정보공과대학')
@@ -59,6 +62,42 @@ export default function MeetingsPage() {
       '기타': ['자기개발', '교양활동', '취업스터디']
     }
   }
+
+  // URL 파라미터로부터 초기 카테고리 설정
+  useEffect(() => {
+    const category = searchParams.get('category')
+    const left = searchParams.get('left')
+    const right = searchParams.get('right')
+    const subcategory = searchParams.get('subcategory')
+
+    if (category) {
+      setSelectedCategory(category)
+
+      // 전공, 동아리, 기타 카테고리 (left/right 구조)
+      if (left && right && categoryData[category]?.[left]) {
+        setSelectedLeftSubcategory(left)
+        setSelectedRightSubcategory(right)
+      }
+      // 공모전, 자격증 카테고리 (단일 subcategory 구조)
+      else if (subcategory && categoryData[category]) {
+        const firstLeft = Object.keys(categoryData[category])[0]
+        // subcategory가 어느 left에 속하는지 찾기
+        for (const leftKey of Object.keys(categoryData[category])) {
+          if (categoryData[category][leftKey].includes(subcategory)) {
+            setSelectedLeftSubcategory(leftKey)
+            setSelectedRightSubcategory(subcategory)
+            break
+          }
+        }
+      }
+      // 파라미터가 없으면 해당 카테고리의 첫 번째 항목 선택
+      else {
+        const firstLeft = Object.keys(categoryData[category])[0]
+        setSelectedLeftSubcategory(firstLeft)
+        setSelectedRightSubcategory(categoryData[category][firstLeft][0])
+      }
+    }
+  }, [searchParams])
 
   // 예시 모임 데이터 (실제로는 API에서 가져올 데이터)
   const allMeetings = [

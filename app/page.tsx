@@ -339,7 +339,12 @@ export default function Home() {
                         <button
                           key={department}
                           onClick={() => {
-                            router.push('/meetings')
+                            const params = new URLSearchParams({
+                              category: '전공',
+                              left: selectedCollege,
+                              right: department
+                            })
+                            router.push(`/meetings?${params.toString()}`)
                           }}
                           className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
@@ -366,7 +371,11 @@ export default function Home() {
                   <button
                     key={contest}
                     onClick={() => {
-                      router.push('/meetings')
+                      const params = new URLSearchParams({
+                        category: '공모전',
+                        subcategory: contest
+                      })
+                      router.push(`/meetings?${params.toString()}`)
                     }}
                     className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedContest === contest
@@ -394,7 +403,11 @@ export default function Home() {
                   <button
                     key={certificate}
                     onClick={() => {
-                      router.push('/meetings')
+                      const params = new URLSearchParams({
+                        category: '자격증',
+                        subcategory: certificate
+                      })
+                      router.push(`/meetings?${params.toString()}`)
                     }}
                     className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
                       selectedCertificate === certificate
@@ -455,7 +468,12 @@ export default function Home() {
                         <button
                           key={club.name}
                           onClick={() => {
-                            router.push('/meetings')
+                            const params = new URLSearchParams({
+                              category: '동아리',
+                              left: selectedClubDivision,
+                              right: club.name
+                            })
+                            router.push(`/meetings?${params.toString()}`)
                           }}
                           className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
@@ -515,7 +533,12 @@ export default function Home() {
                         <button
                           key={field}
                           onClick={() => {
-                            router.push('/meetings')
+                            const params = new URLSearchParams({
+                              category: '기타',
+                              left: selectedActivityType,
+                              right: field
+                            })
+                            router.push(`/meetings?${params.toString()}`)
                           }}
                           className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
                           style={{ fontFamily: 'Inter' }}
