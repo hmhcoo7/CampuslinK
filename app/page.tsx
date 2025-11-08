@@ -261,11 +261,11 @@ export default function Home() {
             <div className="mx-auto flex-shrink-0 flex justify-center">
               <div className="flex gap-0 items-start">
                 {/* 왼쪽 - 단과대 목록 */}
-                <div className="w-[382px] h-[444px] flex-shrink-0">
-                  <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                <div className="flex-shrink-0">
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
                     단과대 &gt;
                   </h3>
-                  <div className="space-y-0">
+                  <div className="w-[382px] h-[444px] space-y-0">
                     {Object.keys(collegeData).map((college) => (
                       <button
                         key={college}
@@ -284,15 +284,15 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323]"></div>
+                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
 
                 {/* 오른쪽 - 학과 목록 */}
-                <div className="w-[386px] h-[376px] flex-shrink-0 ml-8">
+                <div className="flex-shrink-0">
                   <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
                     학과 &gt;
                   </h3>
                   {selectedCollege ? (
-                    <div className="space-y-0">
+                    <div className="w-[386px] h-[376px] space-y-0">
                       {collegeData[selectedCollege].map((department) => (
                         <button
                           key={department}
@@ -377,11 +377,11 @@ export default function Home() {
             <div className="mx-auto flex-shrink-0 flex justify-center">
               <div className="flex gap-0 items-start">
                 {/* 왼쪽 - 중앙동아리 소속 목록 */}
-                <div className="w-[382px] h-[444px] flex-shrink-0">
-                  <h3 className="w-[124px] h-[36px] text-black text-right font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
+                <div className="flex-shrink-0">
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
                     중앙동아리소속 &gt;
                   </h3>
-                  <div className="space-y-0">
+                  <div className="w-[382px] h-[444px] space-y-0">
                     {Object.keys(clubData).map((division) => (
                       <button
                         key={division}
@@ -400,15 +400,15 @@ export default function Home() {
                 </div>
 
                 {/* 세로 구분선 */}
-                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323]"></div>
+                <div className="w-[1px] h-[544px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
 
                 {/* 오른쪽 - 중앙동아리명 목록 */}
-                <div className="w-[386px] h-[376px] flex-shrink-0 ml-8">
+                <div className="flex-shrink-0">
                   <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
                     중앙동아리명 &gt;
                   </h3>
                   {selectedClubDivision ? (
-                    <div className="space-y-0">
+                    <div className="w-[386px] h-[376px] space-y-0">
                       {clubData[selectedClubDivision].map((club) => (
                         <button
                           key={club.name}
