@@ -360,7 +360,7 @@ export default function Home() {
       {isContestDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] max-h-[300px] mx-auto flex-shrink-0 flex items-center justify-center">
+            <div className="w-[382px] max-h-[240px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {contestData.map((contest) => (
                   <button
@@ -388,7 +388,7 @@ export default function Home() {
       {isCertificateDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] max-h-[300px] mx-auto flex-shrink-0 flex items-center justify-center">
+            <div className="w-[382px] max-h-[240px] mx-auto flex-shrink-0 flex items-center justify-center">
               <div className="space-y-0 flex flex-col items-center">
                 {certificateData.map((certificate) => (
                   <button
