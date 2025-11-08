@@ -45,11 +45,18 @@ export default function MeetingsPage() {
       '금융': ['재경관리사', '전산회계', '증권투자권유자문인력', 'CFA'],
       '기타': ['한국사능력검정', '운전면허', '무역영어', '사회조사분석사']
     },
+    '동아리': {
+      '공연예술분과': ['14Fret', '광운극예술연구회', '노을', '여섯소리', 'C-spot', 'Da.KAPO', 'K-ME', 'Pegasus', 'Phoebus', 'Trick'],
+      '문화분과': ['만화동아리 CIA', '33&1/3 RPM', 'KAPA', 'PUB', '보해미안'],
+      '종교봉사분과': ['IVF', 'RCY', '네비게이토선교회', '세상사람들', 'DO-WITH', 'CCC'],
+      '체육1분과': ['KABA', 'KWTC', 'KATT', '아이스유니콘스', 'KAFA', '예인회', '아마야구반', 'KWWS'],
+      '체육2분과': ['아마유도부', '블랙샤크', '검도부', '블레이드러너', '산악부', '스키부', '기우회', '천운'],
+      '학술분과': ['문학동우회', '블랙썬', 'Blackcat', 'SELA', 'TIME', 'KITEL', 'K-NET', '제로비', 'ROLAB', "COM's", 'FOVU']
+    },
     '기타': {
       '취미': ['운동', '음악', '미술', '요리'],
       '봉사': ['교육봉사', '환경봉사', '복지봉사', '재능기부'],
-      '친목': ['동아리', '스터디', '독서모임', '게임'],
-      '기타': ['멘토링', '네트워킹', '세미나', '워크샵']
+      '기타': ['자기개발', '교양활동', '취업스터디']
     }
   }
 
@@ -194,9 +201,44 @@ export default function MeetingsPage() {
       leftSubcategory: '어학',
       rightSubcategory: '토익'
     },
-    // 기타 모임
+    // 동아리 모임
     {
       id: 9,
+      title: 'Blackcat 정보보안 스터디',
+      description: '정보보안 동아리 Blackcat에서 신입 회원을 모집합니다....',
+      startDate: new Date(2025, 8, 23),
+      endDate: new Date(2025, 8, 23),
+      startTime: '18:00',
+      endTime: '20:00',
+      location: '비마관 509호',
+      locationType: '교내',
+      currentParticipants: 5,
+      maxParticipants: 10,
+      duration: '장기',
+      category: '동아리',
+      leftSubcategory: '학술분과',
+      rightSubcategory: 'Blackcat'
+    },
+    {
+      id: 10,
+      title: 'K-ME 댄스 동아리 회원 모집',
+      description: 'K-pop 댄스 커버 동아리에서 새 멤버를 찾습니다. 경험 무관....',
+      startDate: new Date(2025, 8, 26),
+      endDate: new Date(2025, 8, 26),
+      startTime: '19:00',
+      endTime: '21:00',
+      location: '대운동장',
+      locationType: '교내',
+      currentParticipants: 8,
+      maxParticipants: 8,
+      duration: '장기',
+      category: '동아리',
+      leftSubcategory: '공연예술분과',
+      rightSubcategory: 'K-ME'
+    },
+    // 기타 모임
+    {
+      id: 11,
       title: '주말 농구 같이 하실 분',
       description: '매주 토요일 아침 농구 하실 분 모집합니다. 초보도 환영....',
       startDate: new Date(2025, 8, 21),
@@ -213,21 +255,21 @@ export default function MeetingsPage() {
       rightSubcategory: '운동'
     },
     {
-      id: 10,
-      title: '독서 모임 신규 회원 모집',
-      description: '한 달에 한 권씩 책을 읽고 토론하는 모임입니다....',
-      startDate: new Date(2025, 8, 18),
-      endDate: new Date(2025, 8, 18),
-      startTime: '19:00',
-      endTime: '21:00',
-      location: '카페 투썸플레이스',
-      locationType: '교외',
-      currentParticipants: 5,
-      maxParticipants: 8,
+      id: 12,
+      title: '취업 준비 스터디',
+      description: '함께 취업 준비 공부하실 분 모집합니다. 자소서 첨삭, 면접 스터디....',
+      startDate: new Date(2025, 8, 24),
+      endDate: new Date(2025, 8, 24),
+      startTime: '14:00',
+      endTime: '17:00',
+      location: '중앙도서관 스터디룸',
+      locationType: '교내',
+      currentParticipants: 4,
+      maxParticipants: 6,
       duration: '장기',
       category: '기타',
-      leftSubcategory: '친목',
-      rightSubcategory: '독서모임'
+      leftSubcategory: '기타',
+      rightSubcategory: '취업스터디'
     }
   ]
 
@@ -327,6 +369,20 @@ export default function MeetingsPage() {
             >
               자격증
               {selectedCategory === '자격증' && (
+                <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+              )}
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory('동아리')
+                const firstLeft = Object.keys(categoryData['동아리'])[0]
+                setSelectedLeftSubcategory(firstLeft)
+                setSelectedRightSubcategory(categoryData['동아리'][firstLeft][0])
+              }}
+              className="hover:opacity-80 relative"
+            >
+              동아리
+              {selectedCategory === '동아리' && (
                 <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
               )}
             </button>
