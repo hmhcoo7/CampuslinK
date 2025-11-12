@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-export default function MeetingsPage() {
+function MeetingsContent() {
   const searchParams = useSearchParams()
 
   // 브래드크럼 상태
@@ -863,5 +863,13 @@ export default function MeetingsPage() {
         </div>
       </footer>
     </div>
+  )
+}
+
+export default function MeetingsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MeetingsContent />
+    </Suspense>
   )
 }
