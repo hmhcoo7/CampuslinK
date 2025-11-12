@@ -19,6 +19,7 @@ export default function Home() {
   const [selectedCertificateField, setSelectedCertificateField] = useState<string | null>(null) // 선택된 자격증 분야
   const [selectedClubDivision, setSelectedClubDivision] = useState<string | null>(null) // 선택된 중앙동아리 소속
   const [selectedActivityType, setSelectedActivityType] = useState<string | null>(null) // 선택된 활동 유형
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false) // 모바일 메뉴 상태
 
   // 단과대-학과 데이터
   const collegeData: { [key: string]: string[] } = {
@@ -160,19 +161,30 @@ export default function Home() {
       {/* Header */}
       <header className="bg-[#7F2323] text-white px-4 md:px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/icons/nlogo.png"
               alt="CampusLinK Logo"
-              width={24}
-              height={24}
-              className="w-6 h-6"
+              width={32}
+              height={32}
+              className="w-8 h-8"
               priority
             />
             <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
               Campus<br/>LinK
             </span>
-          </div>
+          </Link>
+
+          {/* 모바일 메뉴 버튼 */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            aria-label="메뉴"
+          >
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+          </button>
 
           <nav className="hidden md:flex items-center gap-4 lg:gap-8">
             <div className="relative">
@@ -303,6 +315,87 @@ export default function Home() {
           </nav>
         </div>
       </header>
+
+      {/* 모바일 메뉴 */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-[#7F2323] text-white">
+          <div className="px-4 py-2 space-y-2">
+            <button
+              onClick={() => {
+                setIsMajorDropdownOpen(!isMajorDropdownOpen)
+                setIsContestDropdownOpen(false)
+                setIsCertificateDropdownOpen(false)
+                setIsClubDropdownOpen(false)
+                setIsEtcDropdownOpen(false)
+                const firstCollege = Object.keys(collegeData)[0]
+                setSelectedCollege(firstCollege)
+              }}
+              className="block w-full text-left py-2 hover:opacity-80"
+            >
+              전공
+            </button>
+            <button
+              onClick={() => {
+                setIsContestDropdownOpen(!isContestDropdownOpen)
+                setIsMajorDropdownOpen(false)
+                setIsCertificateDropdownOpen(false)
+                setIsClubDropdownOpen(false)
+                setIsEtcDropdownOpen(false)
+                const firstField = Object.keys(contestData)[0]
+                setSelectedContestField(firstField)
+              }}
+              className="block w-full text-left py-2 hover:opacity-80"
+            >
+              공모전
+            </button>
+            <button
+              onClick={() => {
+                setIsCertificateDropdownOpen(!isCertificateDropdownOpen)
+                setIsMajorDropdownOpen(false)
+                setIsContestDropdownOpen(false)
+                setIsClubDropdownOpen(false)
+                setIsEtcDropdownOpen(false)
+                const firstField = Object.keys(certificateData)[0]
+                setSelectedCertificateField(firstField)
+              }}
+              className="block w-full text-left py-2 hover:opacity-80"
+            >
+              자격증
+            </button>
+            <button
+              onClick={() => {
+                setIsClubDropdownOpen(!isClubDropdownOpen)
+                setIsMajorDropdownOpen(false)
+                setIsContestDropdownOpen(false)
+                setIsCertificateDropdownOpen(false)
+                setIsEtcDropdownOpen(false)
+                const firstDivision = Object.keys(clubData)[0]
+                setSelectedClubDivision(firstDivision)
+              }}
+              className="block w-full text-left py-2 hover:opacity-80"
+            >
+              동아리
+            </button>
+            <button
+              onClick={() => {
+                setIsEtcDropdownOpen(!isEtcDropdownOpen)
+                setIsMajorDropdownOpen(false)
+                setIsContestDropdownOpen(false)
+                setIsCertificateDropdownOpen(false)
+                setIsClubDropdownOpen(false)
+                const firstActivityType = Object.keys(etcData)[0]
+                setSelectedActivityType(firstActivityType)
+              }}
+              className="block w-full text-left py-2 hover:opacity-80"
+            >
+              기타
+            </button>
+            <Link href="/notices" className="block w-full text-left py-2 hover:opacity-80">
+              공지사항
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* 전공 카테고리 드롭다운 */}
       {isMajorDropdownOpen && (
