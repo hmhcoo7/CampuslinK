@@ -15,8 +15,8 @@ export default function Home() {
   const [isClubDropdownOpen, setIsClubDropdownOpen] = useState(false) // 동아리 드롭다운 상태
   const [isEtcDropdownOpen, setIsEtcDropdownOpen] = useState(false) // 기타 드롭다운 상태
   const [selectedCollege, setSelectedCollege] = useState<string | null>(null) // 선택된 단과대
-  const [selectedContest, setSelectedContest] = useState<string | null>(null) // 선택된 공모전
-  const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null) // 선택된 자격증
+  const [selectedContestField, setSelectedContestField] = useState<string | null>(null) // 선택된 공모전 분야
+  const [selectedCertificateField, setSelectedCertificateField] = useState<string | null>(null) // 선택된 자격증 분야
   const [selectedClubDivision, setSelectedClubDivision] = useState<string | null>(null) // 선택된 중앙동아리 소속
   const [selectedActivityType, setSelectedActivityType] = useState<string | null>(null) // 선택된 활동 유형
 
@@ -32,27 +32,27 @@ export default function Home() {
   }
 
   // 공모전 카테고리 데이터
-  const contestData: string[] = [
-    '디자인/예술',
-    '기획/마케팅',
-    '경영/경제/회계',
-    'IT/개발/데이터',
-    '사회/환경/공공',
-    '과학/공학/기술',
-    '문학/글쓰기'
-  ]
+  const contestData: { [key: string]: string[] } = {
+    '디자인': ['UX/UI', '그래픽디자인', '제품디자인', '패션디자인', '인테리어디자인', '캐릭터디자인'],
+    '기획': ['마케팅기획', '서비스기획', '비즈니스모델', '창업아이템', '광고기획', '이벤트기획'],
+    '경영': ['경영전략', '재무회계', '인사조직', '마케팅', '창업경영', '글로벌경영'],
+    'IT': ['웹개발', '앱개발', '게임개발', 'AI/머신러닝', '빅데이터', '블록체인'],
+    '사회': ['사회문제해결', '공공정책', '지역사회개발', '사회혁신', '복지서비스', '환경보호'],
+    '과학': ['생명과학', '화학', '물리학', '수학', '환경과학', '재료과학'],
+    '문학': ['소설', '시', '에세이', '시나리오', '웹소설', '번역문학']
+  }
 
   // 자격증 카테고리 데이터
-  const certificateData: string[] = [
-    '경영/경제/회계',
-    'IT/컴퓨터',
-    '교육/심리/상담',
-    '과학/기술/공학',
-    '디자인/예술',
-    '서비스/관광/조리',
-    '산업/안전/기능',
-    '언어/국제'
-  ]
+  const certificateData: { [key: string]: string[] } = {
+    '경영': ['재경관리사', '전산회계', '전산세무', 'CFA', 'CPA', 'AFPK'],
+    'IT': ['정보처리기사', '네트워크관리사', '리눅스마스터', '컴퓨터활용능력', '정보보안기사', 'SQLD'],
+    '교육': ['교원임용', '한국사능력검정', '한자능력검정', 'KBS한국어능력시험', '독서논술지도사', '보육교사'],
+    '과학': ['화공기사', '환경기사', '위험물산업기사', '생물분류기사', '식품기사', '화학분석기사'],
+    '디자인': ['컬러리스트기사', '시각디자인기사', '제품디자인기사', '실내건축기사', 'GTQ', 'GTQi'],
+    '서비스': ['관광통역안내사', '호텔관리사', '조리기능사', '바리스타', '제과기능사', '미용사'],
+    '산업': ['건축기사', '토목기사', '전기기사', '기계설계기사', '품질관리기사', '산업안전기사'],
+    '언어': ['토익', '토플', 'OPIC', 'JPT', 'JLPT', 'HSK']
+  }
 
   // 기타 카테고리 데이터 (활동 유형)
   const etcData: { [key: string]: string[] } = {
@@ -205,7 +205,11 @@ export default function Home() {
                   setIsCertificateDropdownOpen(false)
                   setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
-                  setSelectedContest(null)
+                  // 초기 선택 설정
+                  if (!isContestDropdownOpen) {
+                    const firstField = Object.keys(contestData)[0]
+                    setSelectedContestField(firstField)
+                  }
                 }}
                 className="hover:opacity-80"
               >
@@ -223,7 +227,11 @@ export default function Home() {
                   setIsContestDropdownOpen(false)
                   setIsClubDropdownOpen(false)
                   setIsEtcDropdownOpen(false)
-                  setSelectedCertificate(null)
+                  // 초기 선택 설정
+                  if (!isCertificateDropdownOpen) {
+                    const firstField = Object.keys(certificateData)[0]
+                    setSelectedCertificateField(firstField)
+                  }
                 }}
                 className="hover:opacity-80"
               >
@@ -365,28 +373,61 @@ export default function Home() {
       {isContestDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] max-h-[240px] mx-auto flex-shrink-0 flex items-center justify-center">
-              <div className="space-y-0 flex flex-col items-center">
-                {contestData.map((contest) => (
-                  <button
-                    key={contest}
-                    onClick={() => {
-                      const params = new URLSearchParams({
-                        category: '공모전',
-                        subcategory: contest
-                      })
-                      router.push(`/meetings?${params.toString()}`)
-                    }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
-                      selectedContest === contest
-                        ? 'text-black'
-                        : 'text-[#595959]'
-                    }`}
-                    style={{ fontFamily: 'Inter' }}
-                  >
-                    {contest}
-                  </button>
-                ))}
+            <div className="mx-auto flex-shrink-0 flex justify-center">
+              <div className="flex gap-0 items-start">
+                {/* 왼쪽 - 공모전 분야 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                    공모전분야 &gt;
+                  </h3>
+                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
+                    {Object.keys(contestData).map((field) => (
+                      <button
+                        key={field}
+                        onClick={() => setSelectedContestField(field)}
+                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
+                          selectedContestField === field
+                            ? 'text-black'
+                            : 'text-[#595959]'
+                        }`}
+                        style={{ fontFamily: 'Inter' }}
+                      >
+                        {field}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 세로 구분선 */}
+                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+
+                {/* 오른쪽 - 공모전 세부분야 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
+                    공모전세부분야 &gt;
+                  </h3>
+                  {selectedContestField ? (
+                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
+                      {contestData[selectedContestField].map((subfield) => (
+                        <button
+                          key={subfield}
+                          onClick={() => {
+                            const params = new URLSearchParams({
+                              category: '공모전',
+                              left: selectedContestField,
+                              right: subfield
+                            })
+                            router.push(`/meetings?${params.toString()}`)
+                          }}
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
+                          style={{ fontFamily: 'Inter' }}
+                        >
+                          {subfield}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
@@ -397,28 +438,61 @@ export default function Home() {
       {isCertificateDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="w-[382px] max-h-[240px] mx-auto flex-shrink-0 flex items-center justify-center">
-              <div className="space-y-0 flex flex-col items-center">
-                {certificateData.map((certificate) => (
-                  <button
-                    key={certificate}
-                    onClick={() => {
-                      const params = new URLSearchParams({
-                        category: '자격증',
-                        subcategory: certificate
-                      })
-                      router.push(`/meetings?${params.toString()}`)
-                    }}
-                    className={`block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
-                      selectedCertificate === certificate
-                        ? 'text-black'
-                        : 'text-[#595959]'
-                    }`}
-                    style={{ fontFamily: 'Inter' }}
-                  >
-                    {certificate}
-                  </button>
-                ))}
+            <div className="mx-auto flex-shrink-0 flex justify-center">
+              <div className="flex gap-0 items-start">
+                {/* 왼쪽 - 자격증 분야 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
+                    자격증분야 &gt;
+                  </h3>
+                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
+                    {Object.keys(certificateData).map((field) => (
+                      <button
+                        key={field}
+                        onClick={() => setSelectedCertificateField(field)}
+                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
+                          selectedCertificateField === field
+                            ? 'text-black'
+                            : 'text-[#595959]'
+                        }`}
+                        style={{ fontFamily: 'Inter' }}
+                      >
+                        {field}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 세로 구분선 */}
+                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
+
+                {/* 오른쪽 - 자격증명 목록 */}
+                <div className="flex-shrink-0">
+                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
+                    자격증명 &gt;
+                  </h3>
+                  {selectedCertificateField ? (
+                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
+                      {certificateData[selectedCertificateField].map((certificate) => (
+                        <button
+                          key={certificate}
+                          onClick={() => {
+                            const params = new URLSearchParams({
+                              category: '자격증',
+                              left: selectedCertificateField,
+                              right: certificate
+                            })
+                            router.push(`/meetings?${params.toString()}`)
+                          }}
+                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
+                          style={{ fontFamily: 'Inter' }}
+                        >
+                          {certificate}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
