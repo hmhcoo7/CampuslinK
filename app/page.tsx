@@ -158,7 +158,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#7F2323] text-white px-8 py-4">
+      <header className="bg-[#7F2323] text-white px-4 md:px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image
@@ -174,7 +174,7 @@ export default function Home() {
             </span>
           </div>
 
-          <nav className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-8">
             <div className="relative">
               <button
                 onClick={() => {
@@ -307,9 +307,9 @@ export default function Home() {
       {/* 전공 카테고리 드롭다운 */}
       {isMajorDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="mx-auto flex-shrink-0 flex justify-center">
-              <div className="flex gap-0 items-start">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
+              <div className="flex gap-0 items-start min-w-fit">
                 {/* 왼쪽 - 단과대 목록 */}
                 <div className="flex-shrink-0">
                   <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
@@ -372,13 +372,13 @@ export default function Home() {
       {/* 공모전 카테고리 드롭다운 */}
       {isContestDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="mx-auto flex-shrink-0 flex justify-center">
-              <div className="flex gap-0 items-start">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
+              <div className="flex gap-0 items-start min-w-fit">
                 {/* 왼쪽 - 공모전 분야 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
-                    공모전분야 &gt;
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
+                    공모전 분야 &gt;
                   </h3>
                   <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(contestData).map((field) => (
@@ -403,8 +403,8 @@ export default function Home() {
 
                 {/* 오른쪽 - 공모전 세부분야 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[160px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
-                    공모전세부분야 &gt;
+                  <h3 className="w-[180px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
+                    공모전 세부 분야 &gt;
                   </h3>
                   {selectedContestField ? (
                     <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
@@ -437,13 +437,13 @@ export default function Home() {
       {/* 자격증 카테고리 드롭다운 */}
       {isCertificateDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="mx-auto flex-shrink-0 flex justify-center">
-              <div className="flex gap-0 items-start">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
+              <div className="flex gap-0 items-start min-w-fit">
                 {/* 왼쪽 - 자격증 분야 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
-                    자격증분야 &gt;
+                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
+                    자격증 분야 &gt;
                   </h3>
                   <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(certificateData).map((field) => (
@@ -469,7 +469,7 @@ export default function Home() {
                 {/* 오른쪽 - 자격증명 목록 */}
                 <div className="flex-shrink-0">
                   <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
-                    자격증명 &gt;
+                    자격증 명 &gt;
                   </h3>
                   {selectedCertificateField ? (
                     <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
@@ -502,13 +502,13 @@ export default function Home() {
       {/* 동아리 카테고리 드롭다운 (중앙동아리) */}
       {isClubDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="mx-auto flex-shrink-0 flex justify-center">
-              <div className="flex gap-0 items-start">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
+              <div className="flex gap-0 items-start min-w-fit">
                 {/* 왼쪽 - 중앙동아리 소속 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
-                    중앙동아리소속 &gt;
+                  <h3 className="w-[160px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
+                    중앙 동아리 소속 &gt;
                   </h3>
                   <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(clubData).map((division) => (
@@ -533,8 +533,8 @@ export default function Home() {
 
                 {/* 오른쪽 - 중앙동아리명 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
-                    중앙동아리명 &gt;
+                  <h3 className="w-[160px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
+                    중앙 동아리 명 &gt;
                   </h3>
                   {selectedClubDivision ? (
                     <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
@@ -567,9 +567,9 @@ export default function Home() {
       {/* 기타 카테고리 드롭다운 (활동 유형) */}
       {isEtcDropdownOpen && (
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
-          <div className="max-w-[1440px] mx-auto px-12 py-8">
-            <div className="mx-auto flex-shrink-0 flex justify-center">
-              <div className="flex gap-0 items-start">
+          <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+            <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
+              <div className="flex gap-0 items-start min-w-fit">
                 {/* 왼쪽 - 활동 유형 목록 */}
                 <div className="flex-shrink-0">
                   <h3 className="w-[124px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4">
@@ -630,10 +630,10 @@ export default function Home() {
       )}
 
       {/* Main Content */}
-      <main className="max-w-[1440px] mx-auto px-12 py-8">
-        <div className="flex gap-8">
+      <main className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* 왼쪽 - 캘린더 */}
-          <div className="w-[45%] bg-[#E1E1E1] rounded-3xl p-8">
+          <div className="w-full lg:w-[45%] bg-[#E1E1E1] rounded-3xl p-4 md:p-8">
             <div className="bg-white rounded-2xl p-6">
               {/* 캘린더 헤더 */}
               <div className="flex items-center justify-between mb-6">
@@ -812,7 +812,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-12 px-12 py-8">
+      <footer className="mt-12 px-4 md:px-12 py-8">
         <div className="max-w-[1440px] mx-auto flex items-center gap-4">
           <img
             src="/icons/kwangwoon-logo.png"
