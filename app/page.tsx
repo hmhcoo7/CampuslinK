@@ -403,7 +403,7 @@ export default function Home() {
 
                 {/* 오른쪽 - 공모전 세부분야 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
+                  <h3 className="w-[160px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
                     공모전세부분야 &gt;
                   </h3>
                   {selectedContestField ? (
@@ -468,7 +468,7 @@ export default function Home() {
 
                 {/* 오른쪽 - 자격증명 목록 */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4">
+                  <h3 className="w-[116px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
                     자격증명 &gt;
                   </h3>
                   {selectedCertificateField ? (
