@@ -62,6 +62,8 @@ export default function NotificationDropdown({
       if (response.ok) {
         const data = await response.json();
         setNotifications(data.notifications || []);
+      } else {
+        console.error('Failed to fetch notifications:', response.status);
       }
     } catch (error) {
       console.error('Failed to fetch notifications:', error);

@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     // 모임 정보 조회
     const { data: meetingData, error: meetingError } = await supabase
       .from('모임')
-      .select('모임_id, 모임제목, 생성자_email')
+      .select('*')
       .eq('모임_id', meetingId)
       .single();
 
@@ -55,6 +55,8 @@ export async function POST(request: Request) {
         { status: 404 }
       );
     }
+
+    const meeting = meetingData as any;
 
     // 이미 신청했는지 확인
     const { data: existingApplication } = await supabase
@@ -93,10 +95,10 @@ export async function POST(request: Request) {
 
     // 모임장에게 알림 생성
     const { error: notificationError } = await supabase.from('알림').insert({
-      user_email: meetingData.생성자_email,
+      user_email: meeting.생성자_email,
       모임_id: meetingId,
       type: 'application_received',
-      message: `${memberData.nick_name}님이 "${meetingData.모임제목}" 모임에 신청했습니다.`,
+      message: `${memberData.nick_name}님이 "${meeting.모임제목}" 모임에 신청했습니다.`,
       related_user_email: memberData.email,
       application_id: applicationData.id,
       is_read: false,

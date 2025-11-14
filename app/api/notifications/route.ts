@@ -21,12 +21,7 @@ export async function GET(request: Request) {
     // 알림 조회 (최신순)
     const { data: notifications, error } = await supabase
       .from('알림')
-      .select(`
-        *,
-        모임:모임_id(모임제목),
-        related_user:related_user_email(nick_name),
-        application:application_id(자기소개)
-      `)
+      .select('*')
       .eq('user_email', user.email)
       .order('created_at', { ascending: false })
       .limit(50);
@@ -40,7 +35,7 @@ export async function GET(request: Request) {
     }
 
     // 읽지 않은 알림 개수
-    const unreadCount = notifications?.filter((n) => !n.is_read).length || 0;
+    const unreadCount = notifications?.filter((n: any) => !n.is_read).length || 0;
 
     return NextResponse.json({
       notifications: notifications || [],

@@ -34,7 +34,7 @@ export async function PATCH(
     // 신청 정보 조회
     const { data: applicationData, error: appError } = await supabase
       .from('모임_신청자')
-      .select('*, 모임:모임_id(모임_id, 모임제목, 생성자_email, current_members, max_capacity)')
+      .select('*')
       .eq('id', applicationId)
       .single();
 
@@ -45,7 +45,21 @@ export async function PATCH(
       );
     }
 
-    const meeting = applicationData.모임 as any;
+    // 모임 정보 조회
+    const { data: meetingData, error: meetingError } = await supabase
+      .from('모임')
+      .select('*')
+      .eq('모임_id', applicationData.모임_id)
+      .single();
+
+    if (meetingError || !meetingData) {
+      return NextResponse.json(
+        { error: '모임 정보를 찾을 수 없습니다.' },
+        { status: 404 }
+      );
+    }
+
+    const meeting = meetingData as any;
 
     // 모임장인지 확인
     if (meeting.생성자_email !== user.email) {
@@ -112,14 +126,14 @@ export async function PATCH(
       // 다른 참여자들에게 새 멤버 알림 (모임장 제외)
       const { data: otherParticipants } = await supabase
         .from('모임_신청자')
-        .select('신청자_email')
+        .select('*')
         .eq('모임_id', meeting.모임_id)
         .eq('status', 'accepted')
         .neq('신청자_email', applicationData.신청자_email)
         .neq('신청자_email', meeting.생성자_email);
 
       if (otherParticipants && otherParticipants.length > 0) {
-        const notifications = otherParticipants.map((p) => ({
+        const notifications = otherParticipants.map((p: any) => ({
           user_email: p.신청자_email,
           모임_id: meeting.모임_id,
           type: 'new_member_joined',
