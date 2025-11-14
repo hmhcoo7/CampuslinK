@@ -4,6 +4,8 @@ import { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import ApplicationModal from '@/components/ApplicationModal'
+import NotificationBell from '@/components/NotificationBell'
 
 function MeetingsContent() {
   const searchParams = useSearchParams()
@@ -24,6 +26,17 @@ function MeetingsContent() {
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showLocationDropdown, setShowLocationDropdown] = useState(false)
   const [showDurationDropdown, setShowDurationDropdown] = useState(false)
+
+  // 신청 모달 상태
+  const [applicationModal, setApplicationModal] = useState<{
+    isOpen: boolean
+    meetingId: string
+    meetingTitle: string
+  }>({
+    isOpen: false,
+    meetingId: '',
+    meetingTitle: '',
+  })
 
   // 카테고리 데이터
   const categoryData: { [key: string]: { [key: string]: string[] } } = {
@@ -447,13 +460,7 @@ function MeetingsContent() {
               )}
             </button>
             <Link href="/notices" className="hover:opacity-80">공지사항</Link>
-            <Image
-              src="/icons/notifications.svg"
-              alt="Notifications"
-              width={24}
-              height={24}
-              className="w-6 h-6 cursor-pointer"
-            />
+            <NotificationBell />
             <Image
               src="/icons/Generic avatar.svg"
               alt="Profile"
@@ -818,10 +825,24 @@ function MeetingsContent() {
 
                     {/* Action Button */}
                     <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Button clicked!', status, meeting.id);
+                        if (status === '모집중') {
+                          console.log('Opening modal...');
+                          setApplicationModal({
+                            isOpen: true,
+                            meetingId: meeting.id.toString(),
+                            meetingTitle: meeting.title,
+                          })
+                        }
+                      }}
+                      disabled={status === '마감'}
                       className={`px-8 py-3 rounded-lg font-semibold text-white border transition-colors ${
                         status === '모집중'
-                          ? 'bg-[#AD7070] border-[#7F2323] hover:bg-[#7F2323]'
-                          : 'bg-[#B7B7B7] border-[#A4A4A4] hover:bg-[#A4A4A4]'
+                          ? 'bg-[#AD7070] border-[#7F2323] hover:bg-[#7F2323] cursor-pointer'
+                          : 'bg-[#B7B7B7] border-[#A4A4A4] cursor-not-allowed'
                       }`}
                     >
                       신청하기
@@ -833,6 +854,16 @@ function MeetingsContent() {
           )}
         </div>
       </main>
+
+      {/* Application Modal */}
+      <ApplicationModal
+        isOpen={applicationModal.isOpen}
+        onClose={() =>
+          setApplicationModal({ ...applicationModal, isOpen: false })
+        }
+        meetingId={applicationModal.meetingId}
+        meetingTitle={applicationModal.meetingTitle}
+      />
 
       {/* Floating Action Button */}
       <button className="fixed bottom-12 right-12 w-[120px] h-[120px] bg-[#7F2323] rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-[#6B1E1E] transition-colors">

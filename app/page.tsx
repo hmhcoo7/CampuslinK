@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import NotificationBell from '@/components/NotificationBell'
 
 export default function Home() {
   const router = useRouter()
@@ -298,13 +299,7 @@ export default function Home() {
               )}
             </div>
             <Link href="/notices" className="hover:opacity-80">공지사항</Link>
-            <Image
-              src="/icons/notifications.svg"
-              alt="Notifications"
-              width={24}
-              height={24}
-              className="w-6 h-6 cursor-pointer"
-            />
+            <NotificationBell />
             <Image
               src="/icons/Generic avatar.svg"
               alt="Profile"
