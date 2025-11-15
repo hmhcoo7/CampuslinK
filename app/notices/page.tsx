@@ -63,9 +63,9 @@ export default function NoticesPage() {
             <Image
               src="/icons/llogo.png"
               alt="CampusLinK Logo"
-              width={60}
-              height={60}
-              className="w-[60px] h-[60px]"
+              width={20}
+              height={20}
+              className="w-[20px] h-[20px] flex-shrink-0 aspect-[1/1]"
               priority
             />
             <div className="flex flex-col font-[family-name:var(--font-crimson)]">
