@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
 import NotificationBell from '@/components/NotificationBell';
 
 interface Notice {
@@ -54,31 +56,58 @@ export default function NoticesPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 헤더 */}
-      <header className="bg-[#7F2323] text-white py-4 px-6 flex justify-between items-center">
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2">
-            <img src="/icons/로고.png" alt="로고" className="h-8" />
-            <span className="text-xl font-bold">CampusLinK</span>
-          </div>
-          <nav className="flex gap-6 text-base">
-            <a href="/" className="hover:underline">홈</a>
-            <a href="/meetings" className="hover:underline">공모전</a>
-            <a href="/notices" className="font-bold underline">자격증</a>
-            <a href="#" className="hover:underline">동아리</a>
-            <a href="#" className="hover:underline">기타</a>
-            <a href="#" className="hover:underline">공지사항</a>
+      {/* Header */}
+      <header className="bg-[#7F2323] text-white px-8 py-4">
+        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/icons/nlogo.png"
+              alt="CampusLinK Logo"
+              width={24}
+              height={24}
+              className="w-6 h-6"
+              priority
+            />
+            <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
+              Campus<br/>LinK
+            </span>
+          </Link>
+
+          <nav className="flex items-center gap-8">
+            <Link href="/meetings?category=전공" className="hover:opacity-80">
+              전공
+            </Link>
+            <Link href="/meetings?category=공모전" className="hover:opacity-80">
+              공모전
+            </Link>
+            <Link href="/meetings?category=자격증" className="hover:opacity-80">
+              자격증
+            </Link>
+            <Link href="/meetings?category=동아리" className="hover:opacity-80">
+              동아리
+            </Link>
+            <Link href="/meetings?category=기타" className="hover:opacity-80">
+              기타
+            </Link>
+            <Link href="/notices" className="hover:opacity-80 relative">
+              공지사항
+              <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
+            </Link>
+            <NotificationBell />
+            <Image
+              src="/icons/Generic avatar.svg"
+              alt="Profile"
+              width={32}
+              height={32}
+              className="w-8 h-8 cursor-pointer"
+            />
           </nav>
-        </div>
-        <div className="flex items-center gap-4">
-          <NotificationBell />
-          <button className="w-10 h-10 bg-white rounded-full"></button>
         </div>
       </header>
 
       {/* 메인 컨텐츠 */}
-      <main className="max-w-[1400px] mx-auto px-6 py-8">
-        <h1 className="text-3xl font-bold mb-8">공지사항</h1>
+      <main className="max-w-[1440px] mx-auto px-12 py-8">
+        <h1 className="text-3xl font-bold mb-8 text-black">공지사항</h1>
 
         {loading ? (
           <div className="text-center py-12 text-gray-500">로딩 중...</div>
@@ -86,11 +115,11 @@ export default function NoticesPage() {
           <div className="border-t-2 border-black">
             {/* 테이블 헤더 */}
             <div className="grid grid-cols-[80px_1fr_120px_140px_100px] gap-4 py-4 px-6 bg-gray-50 border-b border-gray-300 font-semibold text-center">
-              <div>번호</div>
-              <div>제목</div>
-              <div>작성자</div>
-              <div>작성일</div>
-              <div>조회수</div>
+              <div className="text-black">번호</div>
+              <div className="text-black">제목</div>
+              <div className="text-black">작성자</div>
+              <div className="text-black">작성일</div>
+              <div className="text-black">조회수</div>
             </div>
 
             {/* 공지사항 목록 */}
@@ -104,17 +133,17 @@ export default function NoticesPage() {
                     : 'bg-white hover:bg-gray-50'
                 }`}
               >
-                <div className="text-sm text-gray-700">
+                <div className="text-sm text-black">
                   {notice.is_pinned ? '공지사항' : notice.번호}
                 </div>
-                <div className="text-left text-sm font-medium text-gray-900">
+                <div className="text-left text-sm font-medium text-black">
                   {notice.제목}
                 </div>
-                <div className="text-sm text-gray-700">{notice.작성자}</div>
-                <div className="text-sm text-gray-700">
+                <div className="text-sm text-black">{notice.작성자}</div>
+                <div className="text-sm text-black">
                   {formatDate(notice.작성일)}
                 </div>
-                <div className="text-sm text-gray-700">{notice.조회수}</div>
+                <div className="text-sm text-black">{notice.조회수}</div>
               </div>
             ))}
 
@@ -126,6 +155,23 @@ export default function NoticesPage() {
           </div>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="mt-12 px-12 py-8">
+        <div className="max-w-[1440px] mx-auto flex items-center gap-4">
+          <img
+            src="/icons/kwangwoon-logo.png"
+            alt="Kwangwoon University"
+            className="w-[164px] h-[48px] object-cover"
+            style={{ aspectRatio: '41/12' }}
+          />
+          <div className="text-sm text-black">
+            <p className="font-bold text-[#7F2323]">광운대학교</p>
+            <p>서울특별시 노원구 광운로 20</p>
+            <p>대표전화: 02.940.5114</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
