@@ -60,13 +60,10 @@ export default function NoticesPage() {
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image
+            <img
               src="/icons/llogo.png"
               alt="CampusLinK Logo"
-              width={20}
-              height={20}
               className="w-[20px] h-[20px] flex-shrink-0 aspect-[1/1]"
-              priority
             />
             <div className="flex flex-col font-[family-name:var(--font-crimson)]">
               <span className="text-[16px] font-semibold leading-[15px]">Campus</span>
