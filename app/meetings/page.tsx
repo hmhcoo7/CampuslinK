@@ -374,18 +374,19 @@ function MeetingsContent() {
       {/* Header */}
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/icons/nlogo.png"
+              src="/icons/llogo.png"
               alt="CampusLinK Logo"
-              width={24}
-              height={24}
-              className="w-6 h-6"
+              width={60}
+              height={60}
+              className="w-[60px] h-[60px]"
               priority
             />
-            <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
-              Campus<br/>LinK
-            </span>
+            <div className="flex flex-col font-[family-name:var(--font-crimson)]">
+              <span className="text-[16px] font-semibold leading-[15px]">Campus</span>
+              <span className="text-[20px] font-semibold leading-[20px]">LinK</span>
+            </div>
           </Link>
 
           <nav className="flex items-center gap-8">
