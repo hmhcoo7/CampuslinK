@@ -80,11 +80,12 @@ export default function ApplicationModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-full max-w-[1058px] max-h-[751px] bg-[#F5F5F5] rounded-lg shadow-[0_10px_4px_0_rgba(0,0,0,0.25)] p-8 mx-4">
-        {/* 신청하기 제목과 하트 아이콘 */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-[32px] font-semibold leading-[30px] text-black">
-            신청하기
-          </h2>
+        {/* 신청하기 제목 */}
+        <h2 className="text-[32px] font-semibold leading-[30px] text-black mb-6">
+          신청하기
+        </h2>
+
+        <div className="flex items-center gap-2 mb-6">
           <Image
             src="/icons/favorite.svg"
             alt="favorite"
@@ -92,19 +93,18 @@ export default function ApplicationModal({
             height={30}
             className="flex-shrink-0"
           />
+          <p className="text-[24px] font-semibold leading-[30px] text-black">
+            신청 시, <span className="text-[#7F2323]">간단한 자기소개</span>와{' '}
+            <span className="text-[#7F2323]">스터디에 참여하고 싶은 이유</span>를 함께 적어주세요.
+          </p>
         </div>
-
-        <p className="text-[24px] font-semibold leading-[30px] text-black mb-6">
-          신청 시, <span className="text-[#7F2323]">간단한 자기소개</span>와{' '}
-          <span className="text-[#7F2323]">스터디에 참여하고 싶은 이유</span>를 함께 적어주세요.
-        </p>
 
         <textarea
           value={introduction}
           onChange={(e) => setIntroduction(e.target.value)}
           placeholder="꾸준히 참여하면서 서로에게 동기부여가 되는 멤버가 되고 싶습니다."
           maxLength={100}
-          className="w-full h-[300px] p-4 border-2 border-black rounded-lg resize-none focus:outline-none focus:border-[#7F2323] bg-white text-[20px] font-semibold leading-[30px] text-[#595959] text-right"
+          className="w-full h-[300px] p-4 border-2 border-black rounded-lg resize-none focus:outline-none focus:border-[#7F2323] bg-white text-[20px] font-semibold leading-[30px] text-[#595959]"
         />
 
         <div className="text-right text-[#595959] text-[20px] font-semibold leading-[30px] mt-2 mb-8">
