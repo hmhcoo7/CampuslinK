@@ -163,13 +163,10 @@ export default function Home() {
       <header className="bg-[#7F2323] text-white px-4 md:px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/icons/nlogo.png"
+            <img
+              src="/icons/Seal_3D-type.png"
               alt="CampusLinK Logo"
-              width={32}
-              height={32}
               className="w-8 h-8"
-              priority
             />
             <span className="font-bold text-lg font-[family-name:var(--font-crimson)]">
               Campus<br/>LinK
