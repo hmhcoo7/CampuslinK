@@ -165,6 +165,13 @@ export default function LoginPage() {
                 </Link>
               </p>
             </div>
+
+            {/* 아이디/비밀번호 찾기 링크 */}
+            <div className="text-center mt-4">
+              <Link href="/find-account" className="text-[#595959] text-sm hover:underline">
+                아이디/비밀번호 찾기
+              </Link>
+            </div>
           </form>
         </div>
       </main>
