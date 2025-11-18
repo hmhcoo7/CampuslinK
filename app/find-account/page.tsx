@@ -37,17 +37,35 @@ export default function FindAccountPage() {
     setLoading(true)
 
     try {
+      // 이메일이 회원 테이블에 존재하는지 먼저 확인
+      const { data: user, error: userError } = await supabase
+        .from('회원')
+        .select('email')
+        .eq('email', resetEmail)
+        .single()
+
+      if (userError || !user) {
+        setError('등록되지 않은 이메일입니다. 이메일 주소를 확인해주세요.')
+        setLoading(false)
+        return
+      }
+
       // Supabase Auth를 사용한 비밀번호 재설정 이메일 발송
-      const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
         redirectTo: `${window.location.origin}/reset-password`,
       })
 
-      if (error) throw error
+      if (error) {
+        console.error('Password reset error:', error)
+        throw error
+      }
 
-      setMessage('비밀번호 재설정 링크가 이메일로 전송되었습니다. 이메일을 확인해주세요.')
+      console.log('Password reset email sent:', data)
+      setMessage('비밀번호 재설정 링크가 이메일로 전송되었습니다. 이메일을 확인해주세요. (스팸 메일함도 확인해주세요)')
       setResetEmail('')
     } catch (err: any) {
-      setError(err.message || '비밀번호 재설정 중 오류가 발생했습니다.')
+      console.error('Error in handleResetPassword:', err)
+      setError(err.message || '비밀번호 재설정 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
     } finally {
       setLoading(false)
     }
