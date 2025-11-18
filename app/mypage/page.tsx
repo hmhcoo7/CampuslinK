@@ -58,16 +58,16 @@ export default function MyPage() {
               className="w-[120px] h-[120px] md:w-[177px] md:h-[177px] flex-shrink-0"
               style={{ aspectRatio: '1/1' }}
             />
-            <button className="absolute bottom-0 right-0">
+            <button className="absolute bottom-0 right-0 left-0 mx-auto w-8 h-8 md:w-12 md:h-12" style={{ bottom: '-16px' }}>
               <img
                 src="/icons/Edit-icon.svg"
                 alt="Edit"
-                className="w-8 h-8 md:w-12 md:h-12 flex-shrink-0"
+                className="w-full h-full flex-shrink-0"
               />
             </button>
           </div>
           <h1
-            className="text-2xl md:text-[40px] font-semibold text-black text-center md:text-right font-[family-name:var(--font-crimson)] md:leading-5"
+            className="text-2xl md:text-[40px] font-semibold text-black text-center font-[family-name:var(--font-crimson)] md:leading-5"
             style={{ width: '100%', maxWidth: '520px' }}
           >
             잉지 학우님, 반갑습니다.
@@ -76,10 +76,7 @@ export default function MyPage() {
 
         {/* 기본정보 */}
         <div className="w-full max-w-[1037px] mx-auto mb-6 md:mb-8 p-4 md:p-8 border border-black rounded-[10px]">
-          <h2
-            className="text-2xl md:text-[32px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-8"
-            style={{ width: '100%', maxWidth: '298px', marginLeft: 'auto' }}
-          >
+          <h2 className="text-2xl md:text-[32px] font-semibold text-black font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-8">
             기본정보
           </h2>
           <div className="space-y-3 md:space-y-4">
@@ -95,7 +92,7 @@ export default function MyPage() {
               <span className="text-lg md:text-[24px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:w-[140px]">
                 이메일
               </span>
-              <span className="text-base md:text-[20px] font-medium text-black font-['Inter'] break-all">
+              <span className="text-base md:text-[20px] font-medium text-black font-['Inter']">
                 zldmz029800@kw.ac.kr
               </span>
             </div>
@@ -125,10 +122,7 @@ export default function MyPage() {
 
         {/* 모임 신청 내역 */}
         <div className="w-full max-w-[1037px] mx-auto mb-6 md:mb-8 p-4 md:p-8 border border-black rounded-[10px]">
-          <h2
-            className="text-2xl md:text-[32px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6"
-            style={{ width: '100%', maxWidth: '298px', marginLeft: 'auto' }}
-          >
+          <h2 className="text-2xl md:text-[32px] font-semibold text-black font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6">
             모임 신청 내역
           </h2>
           <div className="space-y-3 md:space-y-4">
@@ -139,13 +133,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 21일 17:00 - 19:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 비마관
                   </span>
@@ -166,13 +160,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 24일 18:00 - 21:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 한울관
                   </span>
@@ -193,13 +187,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 19일 18:00 - 21:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 카페 베르테
                   </span>
@@ -217,10 +211,7 @@ export default function MyPage() {
 
         {/* 지난 신청 내역 */}
         <div className="w-full max-w-[1037px] mx-auto mb-6 md:mb-8 p-4 md:p-8 border border-black rounded-[10px]">
-          <h2
-            className="text-2xl md:text-[32px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6"
-            style={{ width: '100%', maxWidth: '298px', marginLeft: 'auto' }}
-          >
+          <h2 className="text-2xl md:text-[32px] font-semibold text-black font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6">
             지난 신청 내역
           </h2>
           <div className="space-y-3 md:space-y-4">
@@ -231,13 +222,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 19일 18:00 - 20:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 누리관
                   </span>
@@ -263,13 +254,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 15일 16:00 - 17:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 집현전
                   </span>
@@ -292,10 +283,7 @@ export default function MyPage() {
 
         {/* 내 모임 생성 내역 */}
         <div className="w-full max-w-[1037px] mx-auto mb-6 md:mb-8 p-4 md:p-8 border border-black rounded-[10px]">
-          <h2
-            className="text-2xl md:text-[32px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6"
-            style={{ width: '100%', maxWidth: '298px', marginLeft: 'auto' }}
-          >
+          <h2 className="text-2xl md:text-[32px] font-semibold text-black font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6">
             내 모임 생성 내역
           </h2>
           <div className="bg-[#E1E1E1] rounded-[20px] md:rounded-[30px] p-4 md:p-6 relative">
@@ -327,10 +315,7 @@ export default function MyPage() {
 
         {/* 지난 내 모임 */}
         <div className="w-full max-w-[1037px] mx-auto mb-6 md:mb-8 p-4 md:p-8 border border-[#070707] rounded-[10px]">
-          <h2
-            className="text-2xl md:text-[32px] font-semibold text-black text-right font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6"
-            style={{ width: '100%', maxWidth: '298px', marginLeft: 'auto' }}
-          >
+          <h2 className="text-2xl md:text-[32px] font-semibold text-black font-[family-name:var(--font-crimson)] md:leading-5 mb-4 md:mb-6">
             지난 내 모임
           </h2>
           <div className="space-y-3 md:space-y-4">
@@ -341,13 +326,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 20일 18:00 - 19:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 세븐일레븐
                   </span>
@@ -365,13 +350,13 @@ export default function MyPage() {
               </h3>
               <div className="space-y-1 text-black font-['Inter']">
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/today.svg" alt="날짜" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/clock.png" alt="날짜" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     날짜: 9월 13일 18:00 - 19:00
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Image src="/icons/location_on.svg" alt="장소" width={20} height={20} className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <img src="/icons/flag.png" alt="장소" className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                   <span className="text-sm md:text-[16px] font-medium leading-[30px]">
                     장소: 세븐일레븐
                   </span>
