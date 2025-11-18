@@ -51,9 +51,7 @@ export default function FindAccountPage() {
       }
 
       // Supabase Auth를 사용한 비밀번호 재설정 이메일 발송
-      const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      })
+      const { data, error } = await supabase.auth.resetPasswordForEmail(resetEmail)
 
       if (error) {
         console.error('Password reset error:', error)
