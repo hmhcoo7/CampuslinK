@@ -84,7 +84,7 @@ export default function EditProfileModal({
       }
 
       // 회원 테이블 업데이트 (닉네임, 관심분야)
-      const { error: updateError } = await supabase
+      const { error: updateError } = await (supabase as any)
         .from('회원')
         .update({
           nick_name: nickname,

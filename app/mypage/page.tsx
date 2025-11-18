@@ -65,7 +65,7 @@ export default function MyPage() {
     try {
       const { data: { user } } = await supabase.auth.getUser()
 
-      if (!user) {
+      if (!user || !user.email) {
         router.push('/')
         return
       }
@@ -82,7 +82,7 @@ export default function MyPage() {
       if (error) throw error
 
       setUserProfile(profile)
-      fetchMeetings(user.email!)
+      fetchMeetings(user.email)
     } catch (error) {
       console.error('Error fetching user:', error)
     } finally {
@@ -192,7 +192,9 @@ export default function MyPage() {
       if (error) throw error
 
       alert('모임 신청이 취소되었습니다.')
-      fetchMeetings(user.email!)
+      if (user?.email) {
+        fetchMeetings(user.email)
+      }
     } catch (error) {
       console.error('Error cancelling meeting:', error)
       alert('모임 취소 중 오류가 발생했습니다.')
@@ -216,17 +218,22 @@ export default function MyPage() {
       if (participantsError) throw participantsError
 
       // 모임 생성자 이메일 가져오기
-      const { data: meeting, error: meetingError } = await supabase
+      const { data: meetingData, error: meetingError } = await supabase
         .from('모임')
         .select('email')
         .eq('모임_id', meetingId)
         .single()
 
-      if (meetingError) throw meetingError
+      if (meetingError || !meetingData) {
+        alert('모임 정보를 찾을 수 없습니다.')
+        return
+      }
+
+      const creatorEmail = (meetingData as any).email
 
       // 모든 참여자 + 생성자의 이메일 목록
-      const allEmails = [...participants.map((p: any) => p.신청자_email), meeting.email]
-      const uniqueEmails = [...new Set(allEmails)]
+      const allEmails = [...(participants || []).map((p: any) => p.신청자_email), creatorEmail]
+      const uniqueEmails = Array.from(new Set(allEmails))
 
       // 각 사용자의 좋아요 증가
       for (const email of uniqueEmails) {
@@ -238,16 +245,17 @@ export default function MyPage() {
 
         if (getUserError) continue
 
-        const { error: updateError } = await supabase
+        const currentHearts = (currentUser as any)?.좋아요 || 0
+        const { error: updateError } = await (supabase as any)
           .from('회원')
-          .update({ 좋아요: (currentUser.좋아요 || 0) + 1 })
+          .update({ 좋아요: currentHearts + 1 })
           .eq('email', email)
 
         if (updateError) console.error('Error updating hearts:', updateError)
       }
 
       // 좋아요 누른 모임 기록
-      setLikedMeetings(prev => new Set([...prev, meetingId]))
+      setLikedMeetings(prev => new Set(Array.from(prev).concat([meetingId])))
 
       alert('모임 구성원 모두에게 하트를 전달했습니다!')
 
