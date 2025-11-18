@@ -431,6 +431,17 @@ function MeetingsContent() {
     }
 
     return true
+  }).sort((a, b) => {
+    // 모임 상태 계산
+    const statusA = a.currentParticipants >= a.maxParticipants ? '마감' : '모집중'
+    const statusB = b.currentParticipants >= b.maxParticipants ? '마감' : '모집중'
+
+    // 1. 모집중 우선
+    if (statusA === '모집중' && statusB === '마감') return -1
+    if (statusA === '마감' && statusB === '모집중') return 1
+
+    // 2. 같은 상태 내에서 날짜 빠른 순
+    return a.startDate.getTime() - b.startDate.getTime()
   })
 
   // 모임 상태 계산
