@@ -66,7 +66,7 @@ export default function MyPage() {
       const { data: { user } } = await supabase.auth.getUser()
 
       if (!user || !user.email) {
-        router.push('/')
+        router.push('/login')
         return
       }
 
