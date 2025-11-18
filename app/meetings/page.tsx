@@ -89,12 +89,24 @@ function MeetingsContent() {
     const left = searchParams.get('left')
     const right = searchParams.get('right')
     const subcategory = searchParams.get('subcategory')
+    const division = searchParams.get('division')
+    const club = searchParams.get('club')
 
     if (category) {
       setSelectedCategory(category)
 
-      // 전공, 동아리, 기타 카테고리 (left/right 구조)
-      if (left && right && categoryData[category]?.[left]) {
+      // 동아리 카테고리 (division 파라미터 사용)
+      if (category === '동아리' && division) {
+        setSelectedLeftSubcategory(division)
+        if (club) {
+          setSelectedRightSubcategory(club)
+        } else {
+          // club이 없으면 '동아리 선택'으로 표시
+          setSelectedRightSubcategory('동아리 선택')
+        }
+      }
+      // 전공, 기타 카테고리 (left/right 구조)
+      else if (left && right && categoryData[category]?.[left]) {
         setSelectedLeftSubcategory(left)
         setSelectedRightSubcategory(right)
       }
@@ -295,6 +307,57 @@ function MeetingsContent() {
       leftSubcategory: '공연예술분과',
       rightSubcategory: 'K-ME'
     },
+    {
+      id: 13,
+      title: '14Fret 밴드 정기 공연 준비',
+      description: '14Fret 밴드의 정기 공연 준비를 위한 합주 세션입니다....',
+      startDate: new Date(2025, 8, 18),
+      endDate: new Date(2025, 8, 18),
+      startTime: '18:00',
+      endTime: '21:00',
+      location: '대학생회관',
+      locationType: '교내',
+      currentParticipants: 4,
+      maxParticipants: 6,
+      duration: '장기',
+      category: '동아리',
+      leftSubcategory: '공연예술분과',
+      rightSubcategory: '14Fret'
+    },
+    {
+      id: 14,
+      title: '노을 어쿠스틱 공연 준비',
+      description: '노을 동아리의 가을 정기 공연을 준비합니다. 어쿠스틱 기타 연주자 환영....',
+      startDate: new Date(2025, 8, 20),
+      endDate: new Date(2025, 8, 20),
+      startTime: '19:00',
+      endTime: '22:00',
+      location: '음악실',
+      locationType: '교내',
+      currentParticipants: 3,
+      maxParticipants: 5,
+      duration: '장기',
+      category: '동아리',
+      leftSubcategory: '공연예술분과',
+      rightSubcategory: '노을'
+    },
+    {
+      id: 15,
+      title: 'Phoebus 밴드 신입 오디션',
+      description: 'Phoebus 종합밴드에서 새 멤버를 모집합니다. 보컬, 기타, 베이스, 드럼 모두 환영....',
+      startDate: new Date(2025, 8, 22),
+      endDate: new Date(2025, 8, 22),
+      startTime: '17:00',
+      endTime: '20:00',
+      location: '복현관',
+      locationType: '교내',
+      currentParticipants: 6,
+      maxParticipants: 10,
+      duration: '단기',
+      category: '동아리',
+      leftSubcategory: '공연예술분과',
+      rightSubcategory: 'Phoebus'
+    },
     // 기타 모임
     {
       id: 11,
@@ -337,7 +400,20 @@ function MeetingsContent() {
     // 카테고리 필터
     if (meeting.category !== selectedCategory) return false
     if (meeting.leftSubcategory !== selectedLeftSubcategory) return false
-    if (meeting.rightSubcategory !== selectedRightSubcategory) return false
+
+    // 동아리 카테고리 특별 처리
+    if (selectedCategory === '동아리') {
+      // '동아리 선택'이면 해당 소속의 모든 동아리 모임 표시
+      if (selectedRightSubcategory === '동아리 선택') {
+        // leftSubcategory(division)만 일치하면 OK
+      } else {
+        // 특정 동아리가 선택되면 해당 동아리 모임만
+        if (meeting.rightSubcategory !== selectedRightSubcategory) return false
+      }
+    } else {
+      // 다른 카테고리는 기존 방식
+      if (meeting.rightSubcategory !== selectedRightSubcategory) return false
+    }
 
     // 날짜 필터
     if (selectedDate && meeting.startDate.toDateString() !== selectedDate.toDateString()) {
@@ -375,13 +451,11 @@ function MeetingsContent() {
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-[40px] h-[40px] flex-shrink-0 rounded-full bg-white flex items-center justify-center">
-              <img
-                src="/icons/kwangwoon-logo.png"
-                alt="CampusLinK Logo"
-                className="w-[30px] h-[30px] object-contain"
-              />
-            </div>
+            <img
+              src="/icons/Seal_3D-type.png"
+              alt="CampusLinK Logo"
+              className="w-[40px] h-[40px] flex-shrink-0"
+            />
             <div className="flex flex-col font-[family-name:var(--font-crimson)]">
               <span className="text-[16px] font-semibold leading-[15px]">Campus</span>
               <span className="text-[20px] font-semibold leading-[20px]">LinK</span>
@@ -564,19 +638,56 @@ function MeetingsContent() {
               />
             </button>
             {isRightDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10 min-w-[200px]">
-                {(categoryData[selectedCategory]?.[selectedLeftSubcategory] || []).map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => {
-                      setSelectedRightSubcategory(item)
-                      setIsRightDropdownOpen(false)
-                    }}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
-                  >
-                    {item}
-                  </button>
-                ))}
+              <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-10 min-w-[200px] max-h-[300px] overflow-y-auto">
+                {selectedCategory === '동아리' ? (
+                  // 동아리 카테고리: division의 동아리 목록 표시
+                  <>
+                    <button
+                      onClick={() => {
+                        const params = new URLSearchParams({
+                          category: '동아리',
+                          division: selectedLeftSubcategory
+                        })
+                        window.location.href = `/meetings?${params.toString()}`
+                        setIsRightDropdownOpen(false)
+                      }}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black border-b"
+                    >
+                      전체 보기
+                    </button>
+                    {(categoryData[selectedCategory]?.[selectedLeftSubcategory] || []).map((item) => (
+                      <button
+                        key={item}
+                        onClick={() => {
+                          const params = new URLSearchParams({
+                            category: '동아리',
+                            division: selectedLeftSubcategory,
+                            club: item
+                          })
+                          window.location.href = `/meetings?${params.toString()}`
+                          setIsRightDropdownOpen(false)
+                        }}
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </>
+                ) : (
+                  // 다른 카테고리: 기존 방식
+                  (categoryData[selectedCategory]?.[selectedLeftSubcategory] || []).map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        setSelectedRightSubcategory(item)
+                        setIsRightDropdownOpen(false)
+                      }}
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-black"
+                    >
+                      {item}
+                    </button>
+                  ))
+                )}
               </div>
             )}
           </div>

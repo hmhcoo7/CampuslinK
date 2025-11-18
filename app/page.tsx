@@ -589,59 +589,30 @@ export default function Home() {
         <div className="bg-[#C5C5C5] transition-all duration-300 ease-in-out">
           <div className="max-w-[1440px] mx-auto px-4 md:px-12 py-8">
             <div className="mx-auto flex-shrink-0 flex justify-center overflow-x-auto">
-              <div className="flex gap-0 items-start min-w-fit">
-                {/* 왼쪽 - 중앙동아리 소속 목록 */}
+              <div className="flex flex-col items-center min-w-fit">
+                {/* 중앙동아리 소속 목록 (가운데 정렬) */}
                 <div className="flex-shrink-0">
-                  <h3 className="w-[160px] h-[36px] text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
+                  <h3 className="text-center text-black font-['Crimson_Text'] font-semibold text-[16px] leading-normal mb-4 whitespace-nowrap">
                     중앙 동아리 소속 &gt;
                   </h3>
-                  <div className="w-[382px] max-h-[240px] overflow-y-auto space-y-0">
+                  <div className="max-h-[240px] overflow-y-auto space-y-0">
                     {Object.keys(clubData).map((division) => (
                       <button
                         key={division}
-                        onClick={() => setSelectedClubDivision(division)}
-                        className={`block text-left font-semibold text-[16px] leading-[30px] transition-colors hover:text-black ${
-                          selectedClubDivision === division
-                            ? 'text-black'
-                            : 'text-[#595959]'
-                        }`}
+                        onClick={() => {
+                          const params = new URLSearchParams({
+                            category: '동아리',
+                            division: division
+                          })
+                          router.push(`/meetings?${params.toString()}`)
+                        }}
+                        className="block text-center font-semibold text-[16px] leading-[30px] transition-colors hover:text-black text-[#595959] w-full"
                         style={{ fontFamily: 'Inter' }}
                       >
                         {division}
                       </button>
                     ))}
                   </div>
-                </div>
-
-                {/* 세로 구분선 */}
-                <div className="w-[1px] h-[300px] flex-shrink-0 bg-[#7F2323] mx-8"></div>
-
-                {/* 오른쪽 - 중앙동아리명 목록 */}
-                <div className="flex-shrink-0">
-                  <h3 className="w-[160px] h-[42px] text-black font-['Inter'] font-semibold text-[16px] leading-[30px] mb-4 whitespace-nowrap">
-                    중앙 동아리 명 &gt;
-                  </h3>
-                  {selectedClubDivision ? (
-                    <div className="w-[386px] max-h-[240px] overflow-y-auto space-y-0">
-                      {clubData[selectedClubDivision].map((club) => (
-                        <button
-                          key={club.name}
-                          onClick={() => {
-                            const params = new URLSearchParams({
-                              category: '동아리',
-                              left: selectedClubDivision,
-                              right: club.name
-                            })
-                            router.push(`/meetings?${params.toString()}`)
-                          }}
-                          className="block text-left text-[#595959] hover:text-black font-semibold text-[16px] leading-[30px] transition-colors whitespace-nowrap"
-                          style={{ fontFamily: 'Inter' }}
-                        >
-                          {club.name} ({club.field})
-                        </button>
-                      ))}
-                    </div>
-                  ) : null}
                 </div>
               </div>
             </div>

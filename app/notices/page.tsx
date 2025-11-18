@@ -60,13 +60,11 @@ export default function NoticesPage() {
       <header className="bg-[#7F2323] text-white px-8 py-4">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-[40px] h-[40px] flex-shrink-0 rounded-full bg-white flex items-center justify-center">
-              <img
-                src="/icons/kwangwoon-logo.png"
-                alt="CampusLinK Logo"
-                className="w-[30px] h-[30px] object-contain"
-              />
-            </div>
+            <img
+              src="/icons/Seal_3D-type.png"
+              alt="CampusLinK Logo"
+              className="w-[40px] h-[40px] flex-shrink-0"
+            />
             <div className="flex flex-col font-[family-name:var(--font-crimson)]">
               <span className="text-[16px] font-semibold leading-[15px]">Campus</span>
               <span className="text-[20px] font-semibold leading-[20px]">LinK</span>
