@@ -73,7 +73,7 @@ export default function MyPage() {
       setUser(user)
 
       // 회원 정보 가져오기
-      const { data: profile, error } = await supabase
+      const { data: profile, error } = await (supabase as any)
         .from('회원')
         .select('*')
         .eq('email', user.email)
