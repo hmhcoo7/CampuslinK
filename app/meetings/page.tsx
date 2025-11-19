@@ -546,13 +546,15 @@ function MeetingsContent() {
             </button>
             <Link href="/notices" className="hover:opacity-80">공지사항</Link>
             <NotificationBell />
-            <Image
-              src="/icons/Generic avatar.svg"
-              alt="Profile"
-              width={32}
-              height={32}
-              className="w-8 h-8 cursor-pointer"
-            />
+            <Link href="/mypage">
+              <Image
+                src="/icons/Generic avatar.svg"
+                alt="Profile"
+                width={32}
+                height={32}
+                className="w-8 h-8 cursor-pointer"
+              />
+            </Link>
           </nav>
         </div>
       </header>

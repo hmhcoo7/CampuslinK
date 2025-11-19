@@ -92,13 +92,15 @@ export default function NoticesPage() {
               <div className="absolute -bottom-[16px] left-0 right-0 h-[3px] bg-white"></div>
             </Link>
             <NotificationBell />
-            <Image
-              src="/icons/Generic avatar.svg"
-              alt="Profile"
-              width={32}
-              height={32}
-              className="w-8 h-8 cursor-pointer"
-            />
+            <Link href="/mypage">
+              <Image
+                src="/icons/Generic avatar.svg"
+                alt="Profile"
+                width={32}
+                height={32}
+                className="w-8 h-8 cursor-pointer"
+              />
+            </Link>
           </nav>
         </div>
       </header>

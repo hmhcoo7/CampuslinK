@@ -74,16 +74,17 @@ export default function MyPage() {
       setUser(user)
 
       // 회원 정보 가져오기
+      const userEmail = user.email
       const { data: profile, error } = await (supabase as any)
         .from('회원')
         .select('*')
-        .eq('email', user.email)
+        .eq('email', userEmail)
         .single()
 
       if (error) throw error
 
       setUserProfile(profile)
-      fetchMeetings(user.email)
+      fetchMeetings(userEmail)
     } catch (error) {
       console.error('Error fetching user:', error)
     } finally {
