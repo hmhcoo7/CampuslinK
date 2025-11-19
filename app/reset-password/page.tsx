@@ -14,10 +14,28 @@ export default function ResetPasswordPage() {
   const [isValidToken, setIsValidToken] = useState(false)
 
   useEffect(() => {
-    // URL에서 토큰 확인
+    // URL 해시에서 토큰 확인 및 세션 교환
     const checkToken = async () => {
+      // URL 해시에서 access_token이나 error 확인
+      const hashParams = new URLSearchParams(window.location.hash.substring(1))
+      const accessToken = hashParams.get('access_token')
+      const error = hashParams.get('error')
+      const errorDescription = hashParams.get('error_description')
+
+      if (error) {
+        setError(errorDescription || '유효하지 않은 링크입니다. 비밀번호 재설정을 다시 시도해주세요.')
+        return
+      }
+
+      if (accessToken) {
+        // 토큰이 있으면 유효한 것으로 간주
+        setIsValidToken(true)
+        return
+      }
+
+      // 토큰이 없으면 세션 확인
       const { data: { session } } = await supabase.auth.getSession()
-      if (session) {
+      if (session && session.user) {
         setIsValidToken(true)
       } else {
         setError('유효하지 않은 링크입니다. 비밀번호 재설정을 다시 시도해주세요.')
