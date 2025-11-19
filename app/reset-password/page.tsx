@@ -16,11 +16,19 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     // URL 해시에서 토큰 확인 및 세션 교환
     const checkToken = async () => {
+      console.log('Full URL:', window.location.href)
+      console.log('Hash:', window.location.hash)
+      console.log('Search:', window.location.search)
+
       // URL 해시에서 access_token이나 error 확인
       const hashParams = new URLSearchParams(window.location.hash.substring(1))
       const accessToken = hashParams.get('access_token')
+      const refreshToken = hashParams.get('refresh_token')
       const error = hashParams.get('error')
       const errorDescription = hashParams.get('error_description')
+
+      console.log('Hash params - access_token:', accessToken)
+      console.log('Hash params - error:', error)
 
       if (error) {
         setError(errorDescription || '유효하지 않은 링크입니다. 비밀번호 재설정을 다시 시도해주세요.')
@@ -28,13 +36,28 @@ export default function ResetPasswordPage() {
       }
 
       if (accessToken) {
-        // 토큰이 있으면 유효한 것으로 간주
+        // 토큰이 있으면 Supabase 세션 설정
+        console.log('Setting session with token...')
+        const { data, error: sessionError } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken || ''
+        })
+
+        if (sessionError) {
+          console.error('Session error:', sessionError)
+          setError('토큰 처리 중 오류가 발생했습니다.')
+          return
+        }
+
+        console.log('Session set successfully:', data)
         setIsValidToken(true)
         return
       }
 
       // 토큰이 없으면 세션 확인
       const { data: { session } } = await supabase.auth.getSession()
+      console.log('Current session:', session)
+
       if (session && session.user) {
         setIsValidToken(true)
       } else {
