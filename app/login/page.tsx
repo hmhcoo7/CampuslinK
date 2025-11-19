@@ -62,7 +62,7 @@ export default function LoginPage() {
 
       const nickname = userProfile?.nick_name || data.user?.user_metadata?.nickname || '사용자'
       alert(`환영합니다, ${nickname}님!`)
-      router.push('/')
+      router.push('/mypage')
       router.refresh()
     } catch (error) {
       console.error('로그인 오류:', error)
