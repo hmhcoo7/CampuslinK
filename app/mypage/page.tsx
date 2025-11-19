@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import NotificationBell from '@/components/NotificationBell'
 import EditProfileModal from '@/components/EditProfileModal'
 import DeleteAccountModal from '@/components/DeleteAccountModal'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase/client'
 
 const INTERESTS_OPTIONS = [
   '학습',
@@ -44,6 +44,7 @@ interface MeetingApplication {
 
 export default function MyPage() {
   const router = useRouter()
+  const supabase = createClient()
   const [user, setUser] = useState<any>(null)
   const [userProfile, setUserProfile] = useState<any>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
